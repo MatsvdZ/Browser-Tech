@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Browser Technologies</title>
+  </head>
+  <body>
+    <header>Dit is een schoolproject, klaag me niet aan!</header>
+
+    <main>
+      <h1>Aangifte erfbelasting</h1>
+      <form action="">
+        <fieldset>
+          <legend>Gegevens van de overledene</legend>
+          <fieldset>
+            <label for="voorletter">Voorletter(s)</label>
+            <input type="text" id="voorletter" />
+            <label for="tussenvoegsel">Tussenvoegsel</label>
+            <input type="text" id="voorletter" />
+            <label for="achternaam">Achternaam</label>
+            <input type="text" id="achternaam" />
+          </fieldset>
+
+          <label for="bsn">bsn overledene</label>
+          <input type="number" id="bsn" />
+
+          <label for="overlijdensdatum">Overlijdensdatum</label>
+          <input type="date" id="overlijdensdatum" />
+        </fieldset>
+
+        <fieldset>
+          <legend>Partnerschap</legend>
+          <fieldset>
+            <legend>
+              Was de overledene getrouwd of had de overledene een geregistreerde
+              partner op het moment van overlijden?
+            </legend>
+
+            <label>
+              Nee. Ga verder met vraag 1c
+              <input type="radio" name="getrouwd" />
+            </label>
+
+            <label>
+              Ja
+              <input type="radio" name="getrouwd" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              Hadden de overledene en diens echtgenoot of geregistreerde partner
+              huwelijkse of partnerschapsvoorwaarden laten vastleggen in een
+              notariële akte?
+            </legend>
+            <label>
+              Nee. Ga verder met vraag 1C.
+              <input type="radio" name="voorwaarden" />
+            </label>
+            <label>
+              Ja. Stuur een kopie van de akte mee met de aangifte.
+              <input type="radio" name="voorwaarden" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              Hadden de overledene en diens partner een finaal verrekenbeding?
+            </legend>
+
+            <label>
+              Nee
+              <input type="radio" name="verrekenbeding" />
+            </label>
+            <label>
+              Ja
+              <input type="radio" name="verrekenbeding" />
+            </label>
+          </fieldset>
+
+          <label for="partnerschapsvoorwaarden"
+            >Datum huwelijkse of partnerschapsvoorwaarden</label
+          >
+          <input type="date" id="partnerschapsvoorwaarden" />
+        </fieldset>
+
+        <fieldset>
+          <legend>Kinderen</legend>
+          <fieldset>
+            <legend>Had de overledene kinderen?</legend>
+            <label>
+              Nee. Ga verder met vraag 1d.
+              <input type="radio" name="overleden-kind" />
+            </label>
+            <label>
+              Ja
+              <input type="radio" name="overleden-kind" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>
+              Is 1 van deze kinderen eerder overleden dan de overledene voor wie
+              u nu aangifte doet?
+            </legend>
+
+            <label>
+              Nee. Ga verder met vraag 1d.
+              <input type="radio" name="eerder-overleden" />
+            </label>
+            <label>
+              Ja
+              <input type="radio" name="eerder-overleden" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Had dit overleden kind zelf kinderen?</legend>
+
+            <label>
+              Nee
+              <input type="radio" name="kinderen-van-kinderen" />
+            </label>
+            <label>
+              Ja
+              <input type="radio" name="kinderen-van-kinderen" />
+            </label>
+          </fieldset>
+        </fieldset>
+
+        <fieldset>
+          <legend>Testament</legend>
+          <fieldset>
+            <legend>Had de overledene een testament?</legend>
+
+            <label>
+              Nee. Ga verder met vraag 2.
+              <input type="radio" name="testament" />
+            </label>
+            <label>
+              Ja. Vul de gegevens in van de notaris die het testament heeft
+              opgemaakt en de datum van het testament
+              <input type="radio" name="testament" />
+            </label>
+          </fieldset>
+
+          <label for="protocolnummer">Protocolnummer notaris</label>
+          <input type="number" id="protocolnummer" />
+
+          <fieldset>
+            <label for="voorletter2">Voorletter(s)</label>
+            <input type="text" id="voorletter2" />
+            <label for="tussenvoegsel2">Tussenvoegsel</label>
+            <input type="text" id="tussenvoegsel2" />
+            <label for="achternaam2">Achternaam</label>
+            <input type="text" id="achternaam2" />
+          </fieldset>
+
+          <label for="vestigingsplaats">Vestigingsplaats</label>
+          <input type="text" id="vestigingsplaats" />
+
+          <label for="datum-testament"
+            >Datum van het testament of van de laatste wijziging</label
+          >
+          <input type="date" id="datum-testament" />
+        </fieldset>
+
+        <fieldset>
+          <legend>Gegevens gemachtigde</legend>
+          <fieldset>
+            <legend>
+              Vul 1 van de 3 in: het bsn of RSIN van de gemachtigde, het
+              beconnummer van de adviseur of het protocolnummer van de notaris
+            </legend>
+
+            <label for="bsn-gemachtigde">Bsn/RSIN gemachtigde</label>
+            <input type="number" id="bsn-gemachtigde" />
+
+            <label for="beconnummer">Beconnummer adviseur</label>
+            <input type="number" id="beconnummer" />
+
+            <label for="protocolnummer-gemachtigde"
+              >Protocolnummer notaris</label
+            >
+            <input type="number" id="protocolnummer-gemachtigde" />
+            <p>Lees ook toelichting bij vraag 1d</p>
+          </fieldset>
+          <fieldset>
+            <legend>Naam gemachtigde en instelling</legend>
+            <label for="voorletter3">Voorletter(s)</label>
+            <input type="text" id="voorletter3" />
+            <label for="tussenvoegsel3">Tussenvoegsel</label>
+            <input type="text" id="tussenvoegsel3" />
+            <label for="achternaam3">Achternaam</label>
+            <input type="text" id="achternaam3" />
+
+            <label for="naam-instelling"
+              >Naam instelling (bijvoorbeeld een notariskantoor))</label
+            >
+            <input type="text" id="naam-instelling" />
+          </fieldset>
+          <fieldset>
+            <legend>Adres</legend>
+            <fieldset>
+              <legend>Adres in Nederland</legend>
+
+              <label for="straat">Straat</label>
+              <input type="text" id="straat" />
+              <label for="huisnummer">Huisnummer</label>
+              <input type="number" id="huisnummer" />
+              <label for="toevoeging">Toevoeging</label>
+              <input type="text" id="toevoeging" />
+
+              <label for="postcode">Postcode</label>
+              <input type="text" id="postcode" />
+              <label for="woonplaats">Woonplaats</label>
+              <input type="text" id="woonplaats" />
+            </fieldset>
+            <fieldset>
+              <legend>Adres in het buitenland</legend>
+              <label for="straat2">Straat</label>
+              <input type="text" id="straat2" />
+              <label for="huisnummer2">Huisnummer</label>
+              <input type="number" id="huisnummer2" />
+              <label for="toevoeging2">Toevoeging</label>
+              <input type="text" id="toevoeging2" />
+
+              <label for="postcode2">Postcode</label>
+              <input type="text" id="postcode2" />
+              <label for="plaats">Plaats</label>
+              <input type="text" id="plaats" />
+              <label for="landcode">Landcode</label>
+              <input type="number" id="landcode">
+            </fieldset>
+            <label for="telefoonnummer">Telefoonnummer</label>
+            <input type="tel" id="telefoonnummer">
+            <label for="email">E-mailadres</label>
+            <input type="email" id="email">
+          </fieldset>
+        </fieldset>
+      </form>
+    </main>
+
+    <footer>Copyright Mats van der Zwan</footer>
+  </body>
+</html>
