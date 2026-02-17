@@ -12,6 +12,29 @@ Na een tijd hier aan gezeten te hebben, moesten we een artikel lezen over icons 
 
 Verder heb ik alvast even snel gekeken naar de styleguide van de NS, om zo alvast te kijken naar hoe de stijl eruit ziet, en even voor mezelf kon bedenken hoe ik dit mogelijk zou kunnen toepassen.
 
+### Weekly geek 1
+<img width="639" height="955" alt="Screenshot 2026-02-17 at 16 22 19" src="https://github.com/user-attachments/assets/ff471a09-f8af-4144-b518-9ac915d285fa" />
+<img width="694" height="650" alt="Screenshot 2026-02-17 at 16 22 37" src="https://github.com/user-attachments/assets/dbcdc07a-ef74-4c8e-89cc-3810220cbd46" />
+<img width="710" height="888" alt="Screenshot 2026-02-17 at 16 22 51" src="https://github.com/user-attachments/assets/8c3fa5d3-a97d-4238-8ee8-edea47d717e0" />
+<img width="713" height="723" alt="Screenshot 2026-02-17 at 16 23 02" src="https://github.com/user-attachments/assets/fb9330b0-fdbe-417b-bca9-dfa118b17c88" />
+<img width="714" height="643" alt="Screenshot 2026-02-17 at 16 23 13" src="https://github.com/user-attachments/assets/0c88c054-1893-4f0d-a2c1-0f5eae9cab62" />
+<img width="713" height="854" alt="Screenshot 2026-02-17 at 16 23 23" src="https://github.com/user-attachments/assets/4bf98bff-bb21-4a1c-aa41-e5bd4746ffef" />
+
+**Conclusion**
+
+Apple took on an impossible task: to add an icon to every menu item. There are just not enough good metaphors to do something like that.
+
+if everything has an icon, it doesn’t mean users will find what they are looking for faster.
+
+Apple did a poor job consistently applying the metaphors and designing the icons themselves.
+
+On the upside: it’s not that hard anymore to design better than Apple! Let’s drink to that.
+
+
+
+
+
+
 
 ### Hoe lang duurde het?
 We hebben ongeveer 2 uur aan theorie gehad over de stof, en de opdracht die we gaan doen.
