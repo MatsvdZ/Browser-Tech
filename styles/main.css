@@ -18,8 +18,7 @@
     "Helvetica Neue",
     sans-serif;
 
-
-  /* Bron: https://tractie.ns.nl/2e23992f3/p/044657-fundamentals */   
+  /* Bron: https://tractie.ns.nl/2e23992f3/p/044657-fundamentals */
   --heading-1: 28px;
   --heading-2: 24px;
   --heading-3: 20px;
@@ -108,9 +107,6 @@ legend {
   font-weight: bold;
 }
 
-
-
-
 fieldset {
   margin-bottom: 1rem;
   border: 0;
@@ -122,14 +118,9 @@ input {
   margin-bottom: 1rem;
 }
 
-
-
 label {
   display: block;
 }
-
-
-
 
 /*******************************/
 /* MARK: SHOW / HIDE QUESTIONS */
