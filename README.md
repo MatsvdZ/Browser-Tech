@@ -12,7 +12,7 @@ Na een tijd hier aan gezeten te hebben, moesten we een artikel lezen over icons 
 
 Verder heb ik alvast even snel gekeken naar de styleguide van de NS, om zo alvast te kijken naar hoe de stijl eruit ziet, en even voor mezelf kon bedenken hoe ik dit mogelijk zou kunnen toepassen.
 
-### Weekly geek 1
+### Weekly geek 1 (17-02)
 <img width="639" height="955" alt="Screenshot 2026-02-17 at 16 22 19" src="https://github.com/user-attachments/assets/ff471a09-f8af-4144-b518-9ac915d285fa" />
 <img width="694" height="650" alt="Screenshot 2026-02-17 at 16 22 37" src="https://github.com/user-attachments/assets/dbcdc07a-ef74-4c8e-89cc-3810220cbd46" />
 <img width="710" height="888" alt="Screenshot 2026-02-17 at 16 22 51" src="https://github.com/user-attachments/assets/8c3fa5d3-a97d-4238-8ee8-edea47d717e0" />
