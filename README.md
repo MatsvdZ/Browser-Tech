@@ -20,7 +20,7 @@ Verder heb ik alvast even snel gekeken naar de styleguide van de NS, om zo alvas
 <img width="714" height="643" alt="Screenshot 2026-02-17 at 16 23 13" src="https://github.com/user-attachments/assets/0c88c054-1893-4f0d-a2c1-0f5eae9cab62" />
 <img width="713" height="854" alt="Screenshot 2026-02-17 at 16 23 23" src="https://github.com/user-attachments/assets/4bf98bff-bb21-4a1c-aa41-e5bd4746ffef" />
 
-**Conclusion**
+**Conclusie**
 
 Apple took on an impossible task: to add an icon to every menu item. There are just not enough good metaphors to do something like that.
 
@@ -90,4 +90,178 @@ Ook heb ik mij dus verder verdiept in JavaScript, en de mogelijkheden hierin om 
 
 ### Wat ga ik volgende keer doen?
 Volgende keer wil ik gewoon door met het stylen van mijn pagina in de NS stijl. Verder wil ik misschien ook even kijken of ik verschillende patterns kan toepassen op mijn inputs, om zo de user verder te helpen.
+
+
+
+## Derde checkout (02-03)
+
+
+
+### Wat heb ik vandaag gedaan?
+
+
+
+
+### Hoe lang duurde het?
+
+
+
+
+###  Wat heb ik geleerd?
+
+
+
+### Wat ga ik volgende keer doen?
+
+
+
+## Weekly geek: UX van HTML
+When not using semantic HTML for its intended purpose, interactive features must be re-implemented. For example, when ```role="link"``` is added to an element, the tab key should enable giving focus to the link and the enter key should execute the link when focused.
+
+
+### Wat voor HTML heb je nodig? Extra attributen? Waar zijn die attributen precies voor nodig? Een Div of een Span?
+
+To recreate an accessible link using the link role on an element that is not an <a>, you need to ensure the link receives focus in the correct tab order, that the element looks like a link, and that the "link" behaves like a link.
+
+Als het inline in tekst staat zoals een normale link in een zin, gebruik je ```<span>```.
+
+Als het blok-achtig is, zoals een card, gebruik ```<div>```.
+
+
+
+**HTML**
+
+```ruby
+<span data-href="https://mozilla.org" tabindex="0" role="link">
+  Fake accessible link created using a span
+</span>
+```
+
+Dus wat heb je nodig om het element klikbaar te maken en het te laten werken met toetsenbord en screenreaders?
+
+```role="link”```
+Dit zegt tegen screenreaders dat dit element zich als een link gedraagt.
+
+```tabindex="0"```
+Dit maakt het element focusbaar met tab voor toetsenbord navigatie
+
+Een “naam”
+Meestal is dit gewoon via de zichtbare tekst in het element. Als een een icoon hebt: ```aria-label=“…”```
+
+
+### Wat voor CSS heb je nodig? Wat als CSS niet ondersteund wordt, wat gebeurt er dan?
+
+Nodige CSS om het eruit te laten zien als link:
+
+```Cursor: pointer;```
+Color (linkkleur)
+```Text-decoration: underline;```
+
+Focus styles:
+```:focus / :focus-visible```
+
+**CSS**
+```ruby
+span[role="link"] {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+span[role="link"]:hover,
+span[role="link"]:active,
+span[role="link"]:focus {
+  color: purple;
+}
+
+span[role="link"]:focus {
+  background-color: palegoldenrod;
+  outline: 1px dotted;
+}
+```
+
+**Wat als de CSS uit staat?**
+
+- Een ```<div>``` en ```<span>``` zonder CSS ziet er uit als gewone tekst/een normaal blok
+- Is mogelijk nog focusbaar (tabindex) maar dat is niet zichtbaar zonder focus styling
+
+Zonder CSS verlies je dus affordance (herkenbaarheid) en een focus-indicatie. Bij de ```<a>```tag is er nog steeds semantiek/gedrag
+
+
+### Wat voor JavaScript heb je nodig?
+
+Je moet:
+1. Klikken afhandelen -> navigeren
+2. Toetsenbord afhandelen -> Enter of space
+
+**JavaScript**
+
+```ruby
+const fakeLinks = document.querySelectorAll('[role="link"]');
+
+for (const link of fakeLinks) {
+  link.addEventListener("click", navigateLink);
+  link.addEventListener("keydown", navigateLink);
+}
+
+// handles click and keydown events on the link
+function navigateLink(e) {
+  if (e.type === "click" || e.key === "Enter") {
+    const ref = e.target ?? e.srcElement;
+    if (ref) {
+      window.open(ref.getAttribute("data-href"), "_blank");
+    }
+  }
+}
+```
+
+ Wat je hier nog steeds niet mee krijgt:
+
+- Rechtermuisknop contextmenu zoals “open link in new tab”
+- URL preview in statusbar bij hover
+- “copy link adres”
+- Middle click om in nieuw tab te openen
+- Browser gedrag zoals drag and drop van links
+- “Visited link” state (```:visited```) werkt niet
+- Screenreaders die linklijsten tonen op basis van echte links missen ‘m soms of behandelen het anders
+
+Je kunt modifier keys deels nabootsen, maar je bent eigenlijk browsergedrag aan het re-implementeren.
+
+
+If the element with ```role="link"``` receives an Enter key event, this executes the link, going to the linked page or moving focus to the in page target.
+
+
+The various widget roles are used to define common interactive patterns. Similar to the document-structure roles, some of these roles, including the link role, duplicate the semantics of native HTML elements that are well supported, and should not be used.
+
+
+### Hoe werkt het element op verschillende apparaten: laptop + telefoon?
+
+Laptop/desktop
+- Toetsenbord navigatie is belangrijk
+- Met de muis: hover states, contextmenu, en middle click
+- Met div/span is dit precies waar je het meeste native gedrag mist.
+
+Telefoon/tablet
+- Geen hover, bijna nooit toetsenbord
+- Tab werkt prima met click
+- Long-press context menu voor links verschijnt vaak alleen bij echte ```<a href>```, bij div/span krijg je dat meestal niet.
+
+
+
+### Werkt het nog hetzelfde met een screenreader?
+
+Nee, je kunt het bruikbaar maken, maar niet identiek.
+
+Wat werkt wel:
+- Element wordt meestal aangekondigd als “link”
+- Het is focusbaar
+- Enter activeert
+
+Wat je vaak mist t.o.v. echte ```<a href>```:
+- Veel screenreader functies gebruiken echte link semantiek om: 
+  	- Alle links op een pagina op te sommen,
+	- sneltoetsen voor “volgende link” te gebruiken,
+	- linkdoel/URL te tonen of te herkenen. 
+- Ook analytics/SEO vertrouwen op ```<a href>```
+
+
 
