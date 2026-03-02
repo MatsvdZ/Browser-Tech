@@ -39,3 +39,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateVisibility(); // Init bij laden
 });
+
+
+
+/* MARK: DATE OF DEATH MAX DATE AND RECENT DATES*/
+
+const today = new Date().toISOString().split("T")[0];
+document.getElementById("date-of-death").max = today;
+
+const recent = new Date();
+const oneYearAgo = new Date();
+oneYearAgo.setFullYear(recent.getFullYear() - 1);
+
+const maxDate = recent.toISOString().split("T")[0];
+const minDate = oneYearAgo.toISOString().split("T")[0];
+
+const input = document.getElementById("date-of-death");
+
+input.max = maxDate;
+input.min = minDate;

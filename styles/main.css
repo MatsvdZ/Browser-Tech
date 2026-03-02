@@ -57,6 +57,9 @@
   --color-border-interactive-hover: #0b44a1;
   --color-border-interactive-pressed: #0b3680;
 
+  --color-border-input-default: #919197;
+  --color-border-input-hover: #73747a;
+
   /* ICONS */
   --icon-xs: 16px 16px;
   --icon-m: 24px 24px;
@@ -84,6 +87,11 @@ header {
   font-size: 2rem;
   font-weight: bold;
   padding: 1rem;
+  color: red;
+}
+
+body {
+  background: var(--color-brand-primary);
 }
 
 /************************/
@@ -98,28 +106,109 @@ h1 {
 
 .header {
   font-size: var(--heading-2);
-  padding-bottom: 1rem;
+}
+
+form {
+  padding: 1rem;
 }
 
 legend {
   color: var(--color-content-emphasis);
   font-size: var(--heading-3);
   font-weight: bold;
+  display: block;
+  width: 100%;
+  background: var(--color-brand-secondary);
+  color: white;
+  padding-left: 1rem;
 }
 
 fieldset {
-  margin-bottom: 1rem;
+  background: var(--color-background-default);
+  margin: 0 auto 1rem;
   border: 0;
-  padding: 1rem;
+  width: 100%;
+  max-width: 720px; /* kies wat je mooi vindt */
+  box-sizing: border-box;
+  border-radius: var(--border-radius-nm);
+  overflow: hidden;
 }
 
 input {
+  display: block;
+  width: 80%;
+  margin: 0 auto 0.8rem; /* centreert input */
   border-radius: var(--border-radius-nm);
-  margin-bottom: 1rem;
+  border: 2px solid var(--color-border-input-default);
+}
+
+input:hover {
+  border-color: var(--color-border-input-hover);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-border-interactive-default);
 }
 
 label {
   display: block;
+  width: 80%; /* zelfde breedte als input */
+  margin: 0.3rem auto 0; /* centreert label */
+}
+
+label:has(input[type="radio"]) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+input[type="radio"] {
+  width: auto;
+  margin: 0;
+}
+
+form > fieldset > :not(legend) {
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
+/* Hoofdsecties */
+form > fieldset > legend {
+  box-sizing: border-box;
+  display: block;
+  padding: 1rem;
+  background: var(--color-brand-secondary);
+  color: white;
+}
+
+fieldset fieldset {
+  padding: 0 1rem 1rem 1rem; /* ruimte binnenin */
+}
+
+fieldset fieldset > legend {
+  margin: 0 0 0.5rem 0; /* geen margin-left meer */
+}
+
+/* Subvragen */
+fieldset fieldset > legend {
+  background: none;
+  color: var(--color-content-emphasis);
+  padding: 0;
+  margin: 0 0 0.5rem 0; /* geen margin-left meer */
+}
+
+/* RADIO BUTTONS UITLIJNEN NAAR RECHTS */
+
+/* label:has(input[type="radio"]) {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 1rem;
+  align-items: center;
+} */
+
+fieldset label:has(input[type="radio"]) {
+  margin-bottom: 0.75rem;
 }
 
 /*******************************/
