@@ -40,8 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateVisibility(); // Init bij laden
 });
 
-
-
 /* MARK: DATE OF DEATH MAX DATE AND RECENT DATES*/
 
 const today = new Date().toISOString().split("T")[0];
