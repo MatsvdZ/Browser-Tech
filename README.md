@@ -95,24 +95,22 @@ Volgende keer wil ik gewoon door met het stylen van mijn pagina in de NS stijl. 
 
 ## Derde checkout (02-03)
 
-
-
 ### Wat heb ik vandaag gedaan?
-
+Ik heb vandaag veel gedaan aan de algemene styling van mijn pagina, en een workshop gevolgd van Vasilis over validatie in de HTML en CSS. Daarnaast heb ik twee artikels gelezen over de ```<a>``` tag en de link role voor de weekly geek: UX van HTML.
 
 
 
 ### Hoe lang duurde het?
-
+Ik heb vandaag ongeveer twee volle uurtjes kunnen zitten aan de styling van mijn pagina, en nog iets minder dan een uurtje gewerkt aan de weekly geek opdracht. 
 
 
 
 ###  Wat heb ik geleerd?
-
+Ik heb vandaag tijdens de workshop nog wat extra informatie opgedaan over validatie in HTML en CSS. Verder heb ik tijdens het werken aan mijn eigen site nog wat extra onderzoek gedaan naar het stylen van forms, legends en fieldsets.
 
 
 ### Wat ga ik volgende keer doen?
-
+Ik ga morgen eerste beginnen met de weekly geek opdracht. Daarna moet ik helaas weg, maar ik ben van plan een deel van het werk in de avond in te halen, zodat ik niet extreem achter begin te lopen. Ik wil dan eigenlijk beginnen met het toepassen van patterns bij bijvoorbeeld postcodes o.i.d.
 
 
 ## Weekly geek: UX van HTML
