@@ -47,7 +47,7 @@
 
             <label>
               Nee. Ga verder met vraag 1c
-              <input type="radio" name="married" value="no" />
+              <input type="radio" name="married" value="no" required />
             </label>
 
             <label>
@@ -65,7 +65,7 @@
             </legend>
             <label>
               Nee. Ga verder met vraag 1C.
-              <input type="radio" name="conditions" value="no" />
+              <input type="radio" name="conditions" value="no" required />
             </label>
             <label>
               Ja. Stuur een kopie van de akte mee met de aangifte.
@@ -79,7 +79,7 @@
             </legend>
             <label>
               Nee
-              <input type="radio" name="settlement-clause" value="no" />
+              <input type="radio" name="settlement-clause" value="no" required />
             </label>
             <label>
               Ja
@@ -99,7 +99,7 @@
             <legend>Had de overledene kinderen?</legend>
             <label>
               Nee. Ga verder met vraag 1d.
-              <input type="radio" name="deceased-child" value="no" />
+              <input type="radio" name="deceased-child" value="no" required />
             </label>
             <label>
               Ja
@@ -116,7 +116,7 @@
 
             <label>
               Nee. Ga verder met vraag 1d.
-              <input type="radio" name="passed-away-earlier" value="no" />
+              <input type="radio" name="passed-away-earlier" value="no" required />
             </label>
             <label>
               Ja
@@ -133,7 +133,7 @@
 
             <label>
               Nee
-              <input type="radio" name="children-of-children" />
+              <input type="radio" name="children-of-children" required />
             </label>
             <label>
               Ja
@@ -149,7 +149,7 @@
 
             <label>
               Nee. Ga verder met vraag 2.
-              <input type="radio" name="testament" value="no" />
+              <input type="radio" name="testament" value="no" required />
             </label>
             <label>
               Ja. Vul de gegevens in van de notaris die het testament heeft
@@ -255,6 +255,7 @@
             <input type="email" id="email" />
           </fieldset>
         </fieldset>
+        <button type="submit">Verzend</button>
       </form>
     </main>
 
