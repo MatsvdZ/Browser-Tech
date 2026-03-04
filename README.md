@@ -262,4 +262,53 @@ Wat je vaak mist t.o.v. echte ```<a href>```:
 - Ook analytics/SEO vertrouwen op ```<a href>```
 
 
+## Vierde checkout (03-03)
 
+### Wat heb ik vandaag gedaan?
+We zijn vandaag de dag begonnen met het bespreken/presenteren van onze research van de weekly geek. Daarna heb ik een workshop gevolgd van Victor over (custom) validity. Helaas moest ik na deze workshop er vandoor.
+
+
+
+### Hoe lang duurde het?
+Ik heb in totaal 2 uur wat gedaan aan de opdracht deze dag. 
+
+
+###  Wat heb ik geleerd?
+Ik heb vandaag meer geleerd over validity en vooral de custom validity kant met JavaScript.
+
+
+### Wat ga ik volgende keer doen?
+Ik ga de volgende keer gewoon lekker verder met mijn eigen opdracht, en deze aanvullen met patterns en validity
+
+
+
+
+
+
+## Bronnen
+
+https://download.belastingdienst.nl/belastingdienst/docs/aangifte_erfbel_2025_suc0602z52fol.pdf
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form#attributes
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/legend
+
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
+
+https://tractie.ns.nl/2e23992f3/p/669cde-colors
+
+https://www.ns.nl/?utm_source=google&utm_medium=Paid_Search&utm_campaign=NSR-CORP-BR-corporate_C13090&utm_content=&utm_term=ns&utm_id=google_ads_16495705419&gad_source=1&gad_campaignid=16495705419&gbraid=0AAAAADPhMsdFM9X0aDbt-uVlAm0xCiJis&gclid=CjwKCAiAwNDMBhBfEiwAd7ti1PKgXOBPIjfv77TtDxCOeOwujAFXPzyuE2VQPxZyFtDA_fLuBz0m9hoCw4oQAvD_BwE
+
+https://www.stoerebinken.nl/werk/ns-fonts-management/
+
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/link_role
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a
