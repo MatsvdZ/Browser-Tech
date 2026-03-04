@@ -92,9 +92,26 @@ Ook heb ik mij dus verder verdiept in JavaScript, en de mogelijkheden hierin om 
 Volgende keer wil ik gewoon door met het stylen van mijn pagina in de NS stijl. Verder wil ik misschien ook even kijken of ik verschillende patterns kan toepassen op mijn inputs, om zo de user verder te helpen.
 
 
+## Voortgang week 1
+Ik ben deze week dus begonnen aan de opdracht a.d.h.v. verschillende workhops waarin we hebben geleerd over verschillende attributes, fieldsets, legends, labels en hoe we dit op een nette manier allemaal kunnen structureren. Ook hebben we de weekly geek gehad, waarin we een artikel moesten lezen over icon gebruik van Apple. Dit kun je hierboven teruglezen. 
+
+Daarna heb ik echt hard gewerkt aan de functionaliteit, zo heb ik in JavaScript ervoor gezorgd dat onnodige vragen niet meteen zichtbaar zijn en pas zichtbaar worden wanneer dit nodig is. Ook heb ik er dan voor gezorgd dat als deze vragen weer weg worden gehaald, dit ook niet wordt opgeslagen in de form.
+
+Ook is er al een begin gemaakt met de styling van de form in de stijl van de NS
+
+
+### Volgende week
+Volgende week ga ik verder met de werking van de elementen, zo wil ik bijvoorbeeld nog een keuze maken voor buitenlands adres of nederlands adres, dus daar wil ik mee aan de slag.
+
+
+
+
+
+
+
+
 
 ## Derde checkout (02-03)
-
 ### Wat heb ik vandaag gedaan?
 Ik heb vandaag veel gedaan aan de algemene styling van mijn pagina, en een workshop gevolgd van Vasilis over validatie in de HTML en CSS. Daarnaast heb ik twee artikels gelezen over de ```<a>``` tag en de link role voor de weekly geek: UX van HTML.
 
