@@ -92,7 +92,7 @@ Ook heb ik mij dus verder verdiept in JavaScript, en de mogelijkheden hierin om 
 Volgende keer wil ik gewoon door met het stylen van mijn pagina in de NS stijl. Verder wil ik misschien ook even kijken of ik verschillende patterns kan toepassen op mijn inputs, om zo de user verder te helpen.
 
 
-## Voortgang week 1
+## Voortgang week 1 (19-02)
 Ik ben deze week dus begonnen aan de opdracht a.d.h.v. verschillende workhops waarin we hebben geleerd over verschillende attributes, fieldsets, legends, labels en hoe we dit op een nette manier allemaal kunnen structureren. Ook hebben we de weekly geek gehad, waarin we een artikel moesten lezen over icon gebruik van Apple. Dit kun je hierboven teruglezen. 
 
 Daarna heb ik echt hard gewerkt aan de functionaliteit, zo heb ik in JavaScript ervoor gezorgd dat onnodige vragen niet meteen zichtbaar zijn en pas zichtbaar worden wanneer dit nodig is. Ook heb ik er dan voor gezorgd dat als deze vragen weer weg worden gehaald, dit ook niet wordt opgeslagen in de form.
@@ -296,6 +296,15 @@ Ik heb vandaag meer geleerd over validity en vooral de custom validity kant met 
 
 ### Wat ga ik volgende keer doen?
 Ik ga de volgende keer gewoon lekker verder met mijn eigen opdracht, en deze aanvullen met patterns en validity
+
+
+
+## Voortgang week 2 (06-03)
+Ik heb deze week niet heel erg veel kunnen doen, maar ik heb wel vandaag feedback gekregen. Er is mij verteld dat ik gewoon door moet gaan met de styling en moet gaan beginnen met het nadenken en implementeren van validatie en en alles daar omheen. Dit is dan ook waar ik volgende week hard mee aan de slag ga. 
+
+Wat ik wel nog deze week heb kunnen doen is dus het volgen van de validity workshop en de theorie van patterns. Waar ik de volgende keer dus echt hard mee aan de slag ga.
+
+
 
 
 
