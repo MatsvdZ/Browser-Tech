@@ -30,29 +30,159 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-  // Eén listener via event delegation
   document.addEventListener("change", (e) => {
     if (e.target.matches('input[type="radio"]')) {
       updateVisibility();
     }
   });
 
-  updateVisibility(); // Init bij laden
+  updateVisibility();
+
+  /* DATE OF DEATH */
+  const dateOfDeathInput = document.getElementById("date-of-death");
+
+  if (dateOfDeathInput) {
+    const today = new Date();
+    const past = new Date();
+    past.setMonth(today.getMonth() - 20);
+
+    dateOfDeathInput.max = today.toISOString().split("T")[0];
+    dateOfDeathInput.min = past.toISOString().split("T")[0];
+  }
+
+  /* 1 OF 3 VALIDITY + DISABLE OTHERS */
+  const fields = [
+    document.getElementById("bsn-authorized-person"),
+    document.getElementById("beconnumber"),
+    document.getElementById("protocolnumber-authorized-person"),
+  ].filter(Boolean);
+
+  const error = document.getElementById("authorized-person-error");
+  const resetButton = document.getElementById("reset-fields");
+
+  function validateGroup() {
+    const filledField = fields.find((field) => field.value.trim() !== "");
+    const oneFilled = Boolean(filledField);
+
+    fields.forEach((field) => {
+      field.disabled = oneFilled && field !== filledField;
+      field.setCustomValidity(
+        oneFilled ? "" : "Vul minimaal 1 van deze 3 velden in.",
+      );
+    });
+
+    if (error) {
+      error.hidden = oneFilled;
+    }
+  }
+
+  fields.forEach((field) => {
+    field.addEventListener("input", validateGroup);
+  });
+
+  if (resetButton) {
+    resetButton.addEventListener("click", () => {
+      fields.forEach((field) => {
+        field.value = "";
+        field.disabled = false;
+        field.setCustomValidity("");
+      });
+
+      if (error) {
+        error.hidden = true;
+      }
+    });
+  }
+
+  validateGroup();
 });
 
-/* MARK: DATE OF DEATH MAX DATE AND RECENT DATES*/
+// COUNTRY LIST AND VALIDATOR
 
-const today = new Date().toISOString().split("T")[0];
-document.getElementById("date-of-death").max = today;
+const countries = [
+  { code: "AFG", name: "Afghanistan" },
+  { code: "ALB", name: "Albanië" },
+  { code: "DZA", name: "Algerije" },
+  { code: "AND", name: "Andorra" },
+  { code: "ARG", name: "Argentinië" },
+  { code: "AUS", name: "Australië" },
+  { code: "AUT", name: "Oostenrijk" },
+  { code: "BEL", name: "België" },
+  { code: "BRA", name: "Brazilië" },
+  { code: "CAN", name: "Canada" },
+  { code: "CHE", name: "Zwitserland" },
+  { code: "CHN", name: "China" },
+  { code: "DEU", name: "Duitsland" },
+  { code: "DNK", name: "Denemarken" },
+  { code: "ESP", name: "Spanje" },
+  { code: "FIN", name: "Finland" },
+  { code: "FRA", name: "Frankrijk" },
+  { code: "GBR", name: "Verenigd Koninkrijk" },
+  { code: "IND", name: "India" },
+  { code: "ITA", name: "Italië" },
+  { code: "JPN", name: "Japan" },
+  { code: "MAR", name: "Marokko" },
+  { code: "NLD", name: "Nederland" },
+  { code: "NOR", name: "Noorwegen" },
+  { code: "POL", name: "Polen" },
+  { code: "PRT", name: "Portugal" },
+  { code: "SWE", name: "Zweden" },
+  { code: "TUR", name: "Turkije" },
+  { code: "USA", name: "Verenigde Staten" },
+  { code: "XXX", name: "Onbekend / niet in lijst" },
+];
 
-const recent = new Date();
-const oneYearAgo = new Date();
-oneYearAgo.setFullYear(recent.getFullYear() - 1);
+const input = document.getElementById("country-input");
+const hidden = document.getElementById("country-code");
+const datalist = document.getElementById("country-codes");
+const error = document.getElementById("country-code-error");
 
-const maxDate = recent.toISOString().split("T")[0];
-const minDate = oneYearAgo.toISOString().split("T")[0];
+countries.forEach((country) => {
+  const option = document.createElement("option");
+  option.value = `${country.code} ${country.name}`;
+  datalist.appendChild(option);
+});
 
-const input = document.getElementById("date-of-death");
+function normalize(value) {
+  return value.trim().toLowerCase();
+}
 
-input.max = maxDate;
-input.min = minDate;
+function findCountry(value) {
+  const normalized = normalize(value);
+
+  return countries.find((country) => {
+    return (
+      normalize(country.code) === normalized ||
+      normalize(country.name) === normalized ||
+      normalize(`${country.code} ${country.name}`) === normalized
+    );
+  });
+}
+
+function validateCountryInput() {
+  const match = findCountry(input.value);
+
+  if (match) {
+    input.value = match.name;   // zichtbaar veld = landnaam
+    hidden.value = match.code;  // opgeslagen waarde = landcode
+    input.setCustomValidity("");
+    error.hidden = true;
+  } else if (input.value.trim() !== "") {
+    hidden.value = "";
+    input.setCustomValidity("Ongeldige landcode of landnaam.");
+    error.hidden = false;
+  } else {
+    hidden.value = "";
+    input.setCustomValidity("");
+    error.hidden = true;
+  }
+}
+
+input.addEventListener("change", validateCountryInput);
+input.addEventListener("blur", validateCountryInput);
+
+input.addEventListener("input", () => {
+  hidden.value = "";
+  input.setCustomValidity("");
+  error.hidden = true;
+});

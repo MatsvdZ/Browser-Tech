@@ -229,7 +229,7 @@ function navigateLink(e) {
 }
 ```
 
- Wat je hier nog steeds niet mee krijgt:
+Wat je hier nog steeds niet mee krijgt:
 
 - Rechtermuisknop contextmenu zoals “open link in new tab”
 - URL preview in statusbar bij hover
@@ -338,3 +338,7 @@ https://www.stoerebinken.nl/werk/ns-fonts-management/
 https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/link_role
 
 https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a
+
+https://stackoverflow.com/questions/17898523/regular-expression-for-dutch-zip-postal-code
+
+https://www.google.com/search?q=hoe+lang+na+overlijden+aangifte+erfbelasting&rlz=1C5CHFA_enNL1083NL1084&oq=hoelang+na+overlijden+aan&gs_lcrp=EgZjaHJvbWUqCQgBEAAYDRiABDIGCAAQRRg5MgkIARAAGA0YgAQyCAgCEAAYDRgeMgoIAxAAGAoYFhgeMggIBBAAGBYYHjIKCAUQABgIGA0YHjIKCAYQABgIGA0YHjIKCAcQABiABBiiBDIKCAgQABiABBiiBDIKCAkQABiABBiiBNIBCTIxMzU1ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8

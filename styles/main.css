@@ -1,12 +1,22 @@
 /*************************/
 /* MARK: DEFAULT STYLING */
 /*************************/
+@font-face {
+  font-family: nssans;
+  src: url(/fonts/nssans-regular.woff2);
+}
+
+@font-face {
+  font-family: nssans-bold;
+  src: url(/fonts/nssans-bold.woff2);
+}
 
 :root {
   /* TYPOGRAPHY */
 
   font-family:
-    system-ui,
+    nssans,
+    sans-serif,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -15,8 +25,7 @@
     Ubuntu,
     Cantarell,
     "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
+    "Helvetica Neue";
 
   /* Bron: https://tractie.ns.nl/2e23992f3/p/044657-fundamentals */
   --heading-1: 28px;
@@ -57,18 +66,22 @@
   --color-border-interactive-hover: #0b44a1;
   --color-border-interactive-pressed: #0b3680;
 
-  --color-border-input-default: #919197;
-  --color-border-input-hover: #73747a;
+  --color-border-input-default: #c4c5cb;
+  --color-border-input-hover: #0063d3;
 
   /* ICONS */
   --icon-xs: 16px 16px;
   --icon-m: 24px 24px;
 
-  /* BORDER RADIUS */
+  /* BORDER RADIUS / SIZE */
   --border-radius-sm: 3px;
   --border-radius-nm: 6px;
   --border-radius-l: 12px;
   --border-radius-f: 9999px;
+
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 4px;
 }
 
 * {
@@ -87,7 +100,9 @@ header {
   font-size: 2rem;
   font-weight: bold;
   padding: 1rem;
-  color: red;
+  color: white;
+  background: red;
+  text-align: center;
 }
 
 body {
@@ -106,21 +121,26 @@ h1 {
 
 .header {
   font-size: var(--heading-2);
-}
-
-form {
-  padding: 1rem;
-}
-
-legend {
+  border-top-left-radius: var(--border-radius-nm);
+  border-top-right-radius: var(--border-radius-nm);
+  font-family: nssans-bold;
   color: var(--color-content-emphasis);
-  font-size: var(--heading-3);
-  font-weight: bold;
   display: block;
   width: 100%;
   background: var(--color-brand-secondary);
   color: white;
-  padding-left: 1rem;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+legend {
+  font-family: nssans-bold;
+  font-size: var(--heading-3);
+  padding-top: .5rem;
+}
+
+form {
+  padding: 1rem;
 }
 
 fieldset {
@@ -139,7 +159,7 @@ input {
   width: 80%;
   margin: 0 auto 0.8rem; /* centreert input */
   border-radius: var(--border-radius-nm);
-  border: 2px solid var(--color-border-input-default);
+  border: var(--border-width-thin) solid var(--color-border-input-default);
 }
 
 input:hover {
@@ -173,39 +193,16 @@ form > fieldset > :not(legend) {
   padding-bottom: 0.3rem;
 }
 
-/* Hoofdsecties */
-form > fieldset > legend {
-  box-sizing: border-box;
-  display: block;
-  padding: 1rem;
-  background: var(--color-brand-secondary);
-  color: white;
-}
-
 fieldset fieldset {
   padding: 0 1rem 1rem 1rem; /* ruimte binnenin */
-}
-
-fieldset fieldset > legend {
-  margin: 0 0 0.5rem 0; /* geen margin-left meer */
 }
 
 /* Subvragen */
 fieldset fieldset > legend {
   background: none;
   color: var(--color-content-emphasis);
-  padding: 0;
   margin: 0 0 0.5rem 0; /* geen margin-left meer */
 }
-
-/* RADIO BUTTONS UITLIJNEN NAAR RECHTS */
-
-/* label:has(input[type="radio"]) {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 1rem;
-  align-items: center;
-} */
 
 fieldset label:has(input[type="radio"]) {
   margin-bottom: 0.75rem;
@@ -228,9 +225,36 @@ fieldset label:has(input[type="radio"]) {
 /*********************************/
 
 input:user-valid {
-  border: 2px solid var(--color-content-succes);
+  border-bottom: 2px solid var(--color-content-succes);
 }
 
 input:user-invalid {
-  border: 2px solid var(--color-content-error);
+  border-bottom: 2px solid var(--color-content-error);
+}
+
+.error {
+  color: var(--color-content-error);
+}
+
+button {
+  background-color: var(--color-content-interactive);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  box-shadow: inset 0 -0.125rem 0 var(--color-content-interactive-hover);
+  color: white;
+  font-size: var(--body-text-m);
+  font-weight: 400;
+  line-height: 1.5625;
+  padding: 0.625rem 1.125rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease-in-out;
+  vertical-align: top;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: inset 0 -5rem 0 var(--color-content-interactive-hover);
 }
