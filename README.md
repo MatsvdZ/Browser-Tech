@@ -305,6 +305,86 @@ Ik heb deze week niet heel erg veel kunnen doen, maar ik heb wel vandaag feedbac
 Wat ik wel nog deze week heb kunnen doen is dus het volgen van de validity workshop en de theorie van patterns. Waar ik de volgende keer dus echt hard mee aan de slag ga.
 
 
+## Weekly geek
+### What happened to text inputs?
+Er zitten wolven in je lichaam, maar deze video gaat in op de wolven genaamd: Adrian en 
+
+Adrian is:
+- Een gebruiker van het web
+- Wilt makkelijke interfaces
+
+Chris is:
+- Een designer voor het web
+- Wilt vooral progressie boeken in zijn carrière
+- Je wordt een ‘designer of note’ als je dingen anders doet
+
+De wolven zijn niet ‘on speaking terms.’ Dit komt omdat in Chris zijn poging tot innovatieve designer veel dingen ‘fixt’ die helemaal niet kapot zijn voor Adrian.
+
+Hyperlinks zijn een mooi voorbeeld. Standaard worden hyperlinks geleverd met underlines. Zo weet iedereen wat een hyperlink is, en wat niet. Ze zijn een belangrijke vorm van ‘signification’. 
+Chris vindt deze underlines afleidend en onnodige ‘clutter’. Chris haalt de lijn weg, waardoor Adrian het lastig vindt om te herkenen welk deel van het web de connective parts zijn die het web het web maken, dat is natuurlijk niet goed in usability termen.
+
+Door de link een andere kleur te geven heb je er ook niet zoveel aan, omdat dit voor kleurenblinden geen toegevoegde waarde heeft.
+
+Een ander voorbeeld zijn de testinputs. In deze video heeft Chris drie van de vier lijnen van een input verwijdert. Het lijkt hierdoor totaal niet meer op een input. Het is geen input meer want er is niks meer om iets in te stoppen, het is een ‘onput’.
+
+Als je alleen een label toevoegt heb je er ook niks aan, vanwege de law of proximity (gestalt principes). 
+
+<img width="651" height="483" alt="Screenshot 2026-03-09 at 15 38 00" src="https://github.com/user-attachments/assets/0f872b3c-f9e5-4435-8165-c57f43fb907b" />
+
+Chris moet dus nu een keuze maken. Hij kan het accepteren dat zijn innovatieve ideeën problemen heeft veroorzaakt en deze proberen op te lossen, of hij kan er voor kiezen om te ‘double downen’.
+
+Om het proximity probleem op te lossen heeft Chris ervoor gekozen om placeholders te gebruiken. Dit is geen label dus. De placeholders zijn standaard een grijze kleur. Chris verandert deze kleur naar wit, waardoor de placeholders er nu uitzien als values waardoor het lijkt alsof de form al is ingevuld. Dit is natuurlijk niet handig als je juist wilt dat mensen je formulier invullen.
+
+Wat dit ook doet is ervoor zorgen dat de placeholder niet meer gebruikt kan worden waar hij eigenlijk voor bedoelt is, namelijk het laten zien van templates van het format van de input die van de gebruiker verwacht wordt. 
+
+Google heeft uiteindelijk onderzoek gedaan naar het lijntje als input, en kwam tot de conclusie:
+
+“The line affordance under the text field was not clear to some users. **The line was confused with a divider.**”
+
+**Dus nu hebben we dit:**
+
+<img width="493" height="75" alt="Screenshot 2026-03-09 at 15 38 47" src="https://github.com/user-attachments/assets/664ddcba-f2c3-4277-8be8-ec7780116017" />
+
+Accepteert Chris dat dit hele verhaal voor niks is geweest? **Nee**. Hij maakt een floating label pattern.
+
+<img width="493" height="90" alt="Screenshot 2026-03-09 at 15 39 17" src="https://github.com/user-attachments/assets/0aac9106-4b4f-483f-9f59-27c9e99b8919" />
+
+Desoriënterend, bizar en iets waar niemand om heeft gevraagd. De slechtste oplossing voor een probleem wat er nooit was.
+
+**Samengevat:**
+Er zijn, breed genomen, drie manieren om een text input te designen, en er is er maar een die goed is. Kies meteen voor de juiste manier, dan kun je door met de echt belangrijke dingen.
+
+**Wat vind ik van deze video?**
+Ik vind de video een hele bijzondere, maar ook komische aanpak om zo mensen te leren waarom en hoe (in dit geval text inputs) iets is gedesigned. 
+
+Ik denk dat dit ook best een goeie manier is om het te leren, omdat je het op deze manier veel makkelijker weet te onthouden omdat dit anders is dan de standaard artikels over dit soort onderwerpen.
+
+
+## Vijfde checkout (09-03)
+
+### Wat heb ik vandaag gedaan?
+We begonnen de dag met een talk van Rijk van Zanten. Dit was een erg interessante talk over hoe hij als oud-CMD'er zijn carrière heeft gevormd tot waar hij nu is als mede oprichter en CTO van Directus.
+
+De talk was ook gewoon prettig om naar te luisteren en best inspirerend over hoe je eigenlijk van een klein project voor het afstuderen, naar je echte werk gaat.
+
+Daarna ben ik verder gegaan met mijn eigen project, waar ik grote stappen in heb gemaakt. Zo heb ik bij veel van de inputs (waar nodig) patterns toegevoegd. Daarnaast heb ik gezorgd dat je een keuze moet maken of de overledene in Nederland woonachtig was, waarna de juiste inputs zichtbaar worden. 
+
+Verder heb ik ook een array aangemaakt in JS waarin alle landen staan waar je uit kan kiezen bij de landcode input. Deze zorgt er voor dat je een lijst te zien krijgt waar je uit kan kiezen en in kan typen om het juiste land te vinden. Je kan op zowel land, als landcode zoeken. Als je een land selecteerd toont hij in de input gewoon dat land, maar slaat hij de landcode van dat land op als antwoord.
+
+Aan het einde van de dag hebben we ons bezig gehouden met de weekly geek, mijn notities kun je hierboven teruglezen.
+
+### Hoe lang duurde het?
+Ik heb vandaag in totaal zo'n 4 tot 5 uur aan mijn project kunnen werken. Ik was goed geconcentreerd bezig en heb dus veel kunnen doen.
+
+
+###  Wat heb ik geleerd?
+Ik heb me verder verdiept in patterns, maar ook meer gewerkt met JavaScript door met de landen te werken en hoe ik dit toon, maar ook hoe ik dit dan opsla. Ik heb hier een aantal verschillende manieren voor gebruikt en bekeken om zo tot de (voor mij) meest logische oplossing te komen.
+
+
+### Wat ga ik volgende keer doen?
+Ik ga de volgende keer echt aan de slag met de verdieping in validatie, en dit eerst volledig te regelen met CSS, en dit verder aan te vullen met JavaScript.
+
+
 
 
 
