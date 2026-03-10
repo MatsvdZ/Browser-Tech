@@ -388,6 +388,52 @@ Ik ga de volgende keer echt aan de slag met de verdieping in validatie, en dit e
 
 
 
+## Zesde checkout (10-03)
+### Wat heb ik vandaag gedaan?
+Ik heb vandaag extreem veel gedaan aan validity met zowel HTML, CSS als JavaScript. Ik heb gezorgd dat mijn HTML zo goed mogelijk valideert. Ik heb hiervoor attributen zoals ```required```, ```pattern```, ```type``` en ```min/max``` gebruikt. Op deze manier werkt de basisvalidatie ook wanneer JavaScript is uitgeschakeld.
+
+<img width="716" height="632" alt="Screenshot 2026-03-10 at 15 56 28" src="https://github.com/user-attachments/assets/9b560ea6-2fbe-4e1c-b81d-d9d73704df35" />
+
+Ook heb ik in CSS met pseudo classes zoals ```:user-invalid``` en ```user:valid``` error en success states toegevoegd. Dit zorgt dat de gebruiker ook visuele feedback krijgt wanneer er een veld fout is ingevuld.
+
+<img width="478" height="869" alt="Screenshot 2026-03-10 at 15 58 00" src="https://github.com/user-attachments/assets/95891fab-98ad-421f-84de-ea304086bc20" />
+
+En als laatste (het moeilijkste en vooral langs durende) heb ik de validatie volledig uitgebreid en custom gemaakt met JavaScript om zo betere en complexere foutmeldingen te krijgen. Ik heb met ```setCustomValidity()``` per veld een aangepaste foutmelding gemaakt. Ook heb ik ervoor gezorgd dat er bij de vraag 'vul 1 van de 3 in' ook een melding staat voor de hele groep.
+
+<img width="546" height="807" alt="Screenshot 2026-03-10 at 15 58 33" src="https://github.com/user-attachments/assets/6ec4e194-5ff8-4180-bb1d-80d320bac550" />
+
+<img width="536" height="973" alt="Screenshot 2026-03-10 at 15 59 31" src="https://github.com/user-attachments/assets/bd5cdb11-2da8-406e-9693-631e0c6feeab" />
+
+Om de progressive enhancement toe te passen, heb ik ervoor gezorgd dat het ```novalidate``` attribuut alleen via JavaScript aan het formulier wordt toegevoegd. Op deze manier werkt zonder JavaScript de standaard browservalidatie, en met JavaScript worden mijn eigen foutmeldingen gebruikt.
+
+<img width="557" height="150" alt="Screenshot 2026-03-10 at 15 55 17" src="https://github.com/user-attachments/assets/aeed5a24-8ad5-4710-8514-6e4fa2263c58" />
+
+
+### Hoe lang duurde het?
+Ik heb vandaag wat minder pauze genomen om hier echt keihard aan te werken, ik heb er dus zo'n 5,5 uur aan gewerkt vandaag.
+
+
+
+###  Wat heb ik geleerd?
+Ik heb vandaag met de kennis uit de workshops en hulp van het internet gewerkt aan mijn validity. Hierbij heb ik geleerd hoe ik met zowel HTML, CSS als JavaScript kan valideren. Daarbij heb ik dus ook geleerd hoe ik met JavaScript dus volledig custom validiteit kan maken.
+
+
+
+### Wat ga ik volgende keer doen?
+Volgende keer krijg ik weer feedback van Vasilis, wat hoppelijk positief is, en waar ik waarschijnlijk tips krijg om de puntjes op de i te zetten.
+
+
+
+
+## Voortgang week 3 (10-03)
+Ik heb deze week dus grote stappen kunnen zetten in het uitwerken van mijn formulier. Ik heb de basis van mijn formulier veel meer uitgebreid met HTML validatie. Hierdoor kan de browser dus al veel validatie zelf doen.
+
+Ook heb ik het formulier nu een stuk meer interactief gemaakt met JavaScript. Ik heb deze week validatie geregeld via JS waarbij ik dus aangepaste en complexere foutmeldingen kan tonen, zoals velden waarbij slechts een van de opties ingevuld hoeft te worden.
+
+Ik heb hierbij rekening gehouden met progressive enhancement. Zonder JS blijft de standaard browservalidatie actief, terwijl JS mijn eigen foutmeldingen gebruikt.
+
+Feedback docent:
+
 
 
 
