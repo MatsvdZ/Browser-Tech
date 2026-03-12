@@ -1,42 +1,59 @@
+// HTML krijgt JS class om anders te stijlen met en zonder JS
 document.documentElement.classList.add("js");
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Als JS laad, geef de form dan novalidate
   const form = document.querySelector("form");
 
   if (form) {
     form.setAttribute("novalidate", "");
   }
 
+  // Alle vragen die zichtbaar moeten zijn na een specifiek antwoord
   const conditionalBlocks = document.querySelectorAll(
     ".conditional[data-show-when]",
   );
 
+  // Helper functie, checkt of veld leeg is
   const isEmpty = (value) => value.trim() === "";
+
+  // Checkt alleen getoonde velden, checkt niet verstopte velden
   const isActiveField = (field) => field && !field.disabled;
   const $ = (id) => document.getElementById(id);
 
+  // Initialiseer alle errors
   function initFieldErrors() {
+    // Verstop alle errors tijdens het laden
     document.querySelectorAll(".error").forEach((el) => {
       el.hidden = true;
     });
 
+    // Make all fields 'not invalid yet'
     document.querySelectorAll("input, select, textarea").forEach((field) => {
       field.setAttribute("aria-invalid", "false");
     });
   }
 
+  /********************************************/
+  /* MARK: ERRORS BIJ VELD TONEN OF VERBERGEN */
+  /********************************************/
+
+  // Zet custom validity op het veld
   function setFieldError(field, message = "") {
     if (!field) return;
 
+    // Zet aria-invalid op true of false
     field.setCustomValidity(message);
     field.setAttribute("aria-invalid", message ? "true" : "false");
 
+    // Zoekt de gekoppelde .error via aria-describedbt
     const errorId = (field.getAttribute("aria-describedby") || "")
       .split(" ")
       .find(
         (id) => id.endsWith("-error") && id !== "authorized-person-group-error",
       );
 
+    // Toont of verbergt die foutmelding
     const errorEl = errorId ? $(errorId) : null;
 
     if (errorEl) {
@@ -45,6 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /*************************************/
+  /* MARK: FOUTMELDING VOOR HELE GROEP */
+  /*************************************/
+
+  // Wordt gebruikt voor een groep inputs, zoals radio groups
+  // bij vraag "vul 1 van de 3 in"
   function setGroupError(id, message = "") {
     const errorEl = $(id);
     if (!errorEl) return;
@@ -53,6 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
     errorEl.hidden = !message;
   }
 
+  // Maakt een veld leeg op uncheckt een radio
+  // Wist ook foutmelding
   function resetField(field) {
     if (field.type === "radio") {
       field.checked = false;
@@ -64,12 +89,18 @@ document.addEventListener("DOMContentLoaded", () => {
     field.setAttribute("aria-invalid", "false");
   }
 
+  // Zoek welke radio met dezelfde name is aangeklikt en geef de value terug
+  // bijv: name="married" dan is gekozen waarde: ="yes"
   function getRadioValue(name) {
     return (
       document.querySelector(`input[type="radio"][name="${name}"]:checked`)
         ?.value ?? null
     );
   }
+
+  /***************************************/
+  /* MARK: CONDITIONALE VRAGEN SHOW/HIDE */
+  /***************************************/
 
   function updateConditionalVisibility() {
     conditionalBlocks.forEach((block) => {
@@ -101,21 +132,72 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /******************************/
+  /* MARK: LIVEVALIDATIE LOGICA */
+  /******************************/
+
+  // Checkt wanneer er live validatie moet gebeuren
+  function shouldLiveValidate(field) {
+    const value = field.value.trim();
+
+    // BSN alleen live valideren bij 8+ tekens
+    if (field.id === "bsn" || field.id === "bsn-authorized-person") {
+      return value.length >= 8;
+    }
+
+    // Beconnummer alleen live valideren bij 7+ tekens
+    if (field.id === "beconnumber") {
+      return value.length >= 7;
+    }
+
+    // Protocolnummer alleen live valideren bij 6+ tekens
+    if (
+      field.id === "protocol-number" ||
+      field.id === "protocolnumber-authorized-person"
+    ) {
+      return value.length >= 6;
+    }
+
+    // Postcode alleen live valideren vanaf 124AB, spatie telt niet mee
+    if (field.id === "zip-code" || field.id === "zip-code-2") {
+      return value.replace(/\s/g, "").length >= 6;
+    }
+
+    // Email alleen live valideren zodra er een @ in staat
+    if (field.id === "email") {
+      return value.includes("@");
+    }
+
+    return true;
+  }
+
+  /************************/
+  /* MARK: BASISVALIDATIE */
+  /************************/
+
+  // Controleert of het veld actief is
   function validateRequiredText(field, message) {
     if (!isActiveField(field)) {
       setFieldError(field, "");
       return true;
     }
 
+    // Controleert of het veld verplicht is
     if (field.required && isEmpty(field.value)) {
       setFieldError(field, message);
       return false;
     }
 
+    // Is het veld leeg? Zo niet, wordt er een foutmelding gezet
     setFieldError(field, "");
     return true;
   }
 
+  /***************************/
+  /* MARK: PATTERN VALIDATIE */
+  /***************************/
+
+  // Herbruibare functie die controleert:
   function validatePattern(
     field,
     { requiredMessage, invalidMessage, pattern },
@@ -127,20 +209,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const value = field.value.trim();
 
+    // Als het verplicht en leeg is, stuur requiredMessage
     if (field.required && isEmpty(value)) {
       setFieldError(field, requiredMessage);
       return false;
     }
 
+    // Als ingevuld is, maar regex is fout, stuur invalidMessage
     if (!isEmpty(value) && !pattern.test(value)) {
       setFieldError(field, invalidMessage);
       return false;
     }
 
+    // Anders -> veld is geldig
     setFieldError(field, "");
     return true;
   }
 
+  // De functies hieronder gebruiken validatePattern of eigen logica:
+
+  // Voorletters, controleert formaat zoals M. of M.M.
   function validateInitials(field) {
     return validatePattern(field, {
       requiredMessage: "Vul uw voorletter(s) in.",
@@ -149,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // BSN nummer, controleert 8 of 9 cijfers
   function validateBsn(field) {
     return validatePattern(field, {
       requiredMessage: "Vul het BSN in.",
@@ -157,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Beconnummer, controleert 7 cijfers
   function validateBecon(field) {
     return validatePattern(field, {
       requiredMessage: "Vul het beconnummer in.",
@@ -165,6 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Protocolnummer, controleert 6 cijfers
   function validateProtocol(field) {
     return validatePattern(field, {
       requiredMessage: "Vul het protocolnummer in.",
@@ -173,6 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Postcode, controleert Nederlandse postcode
   function validatePostcode(field) {
     return validatePattern(field, {
       requiredMessage: "Vul een postcode in.",
@@ -181,6 +273,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /*****************************/
+  /* MARK: STANDAARD VALIDATIE */
+  /*****************************/
+
+  // Datum, controleert of datum geldig is
   function validateDate(field, message) {
     if (!isActiveField(field)) {
       setFieldError(field, "");
@@ -203,6 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
+  // Email, gebruikt ingebouwde email-validatie van browser
   function validateEmail(field) {
     if (!isActiveField(field)) {
       setFieldError(field, "");
@@ -225,6 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
+  // Telefoonnummer, is optioneel maar als er iets in staat moet dit op een telefoonnummer lijken
   function validateOptionalTel(field) {
     if (!isActiveField(field)) {
       setFieldError(field, "");
@@ -247,12 +346,18 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
+  /*********************************/
+  /* MARK: KEUZE GEMAAKT VALIDATIE */
+  /*********************************/
+
+  // Kijkt of er binnen radio group een keuze is gemaakt
   function validateRadioGroup(name, message) {
     const radios = document.querySelectorAll(
       `input[type="radio"][name="${name}"]`,
     );
     if (!radios.length) return true;
 
+    // Eerste radio krijgt custom validity message en groepsfoutmelding wordt zichtbaar
     const activeRadios = [...radios].filter((radio) => !radio.disabled);
     if (!activeRadios.length) {
       setGroupError(`${name}-error`, "");
@@ -261,6 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const checked = activeRadios.some((radio) => radio.checked);
 
+    // Als er wel een keuze is gemaakt, wordt error weggehaald
     activeRadios.forEach((radio, index) => {
       radio.setAttribute("aria-invalid", checked ? "false" : "true");
       radio.setCustomValidity(index === 0 && !checked ? message : "");
@@ -270,9 +376,15 @@ document.addEventListener("DOMContentLoaded", () => {
     return checked;
   }
 
+  /***********************/
+  /* MARK: DATUM GRENZEN */
+  /***********************/
+
+  // Checkt huidige datum
   const today = new Date();
   const todayStr = today.toISOString().split("T")[0];
 
+  // Hierin stel ik in: max = vandaag en min = 20 maanden geleden
   const dateOfDeath = $("date-of-death");
   if (dateOfDeath) {
     const past = new Date(today);
@@ -282,11 +394,17 @@ document.addEventListener("DOMContentLoaded", () => {
     dateOfDeath.min = past.toISOString().split("T")[0];
   }
 
+  // Andere datumvelden
   ["conditions-date", "date-testament"].forEach((id) => {
     const field = $(id);
     if (field) field.max = todayStr;
   });
 
+  /*********************/
+  /* MARK: LANDENLIJST */
+  /*********************/
+
+  // Array met landen en landcodes
   const countries = [
     { code: "AFG", name: "Afghanistan" },
     { code: "ALB", name: "Albanië" },
@@ -305,6 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const countryHidden = $("country-code");
   const datalist = $("country-codes");
 
+  // Vult automatisch <datalist> met de landen als opties
   if (countryInput && countryHidden && datalist) {
     countries.forEach((country) => {
       const option = document.createElement("option");
@@ -315,6 +434,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const normalize = (value) => value.trim().toLowerCase();
 
+  /**********************************/
+  /* MARK: LAND VALIDATIE + OPSLAAN */
+  /**********************************/
+
+  // Kijkt of het veld actief is
   function validateCountry() {
     if (!countryInput || !countryHidden || !isActiveField(countryInput)) {
       setFieldError(countryInput, "");
@@ -323,6 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const value = countryInput.value.trim();
 
+    // Checkt of het verplicht en leeg is
     if (countryInput.required && isEmpty(value)) {
       countryHidden.value = "";
       setFieldError(countryInput, "Vul een land in.");
@@ -335,8 +460,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return true;
     }
 
+    // Zoekt of invoer overeenkomt met land of landcode
     const match = countries.find((country) => {
       const full = `${country.code} ${country.name}`;
+      // Geldig, input toont landnaam, hidden input krijgt landcode
       return (
         normalize(country.code) === normalize(value) ||
         normalize(country.name) === normalize(value) ||
@@ -346,6 +473,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!match) {
       countryHidden.value = "";
+      // geen match is foutmelding tonen
       setFieldError(countryInput, "Kies een geldig land uit de lijst.");
       return false;
     }
@@ -365,21 +493,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /***********************************/
+  /* MARK: "1 VAN 3" GROEP VALIDATIE */
+  /***********************************/
+
+  // Voor bsn, beconnummer en protocolnummer
   const authorizedFields = [
     $("bsn-authorized-person"),
     $("beconnumber"),
     $("protocolnumber-authorized-person"),
   ].filter(Boolean);
 
+  // Kijk of 1 van de 3 is ingevuld
   function validateAuthorizedGroup() {
     if (!authorizedFields.length) return true;
 
     const filledField = authorizedFields.find((field) => !isEmpty(field.value));
 
+    // Zodra een veld is ingevuld, andere velden dissabelen
     authorizedFields.forEach((field) => {
       field.disabled = !!filledField && field !== filledField;
     });
 
+    // Als geen veld is gevuld, groepsfout tonen
     if (!filledField) {
       authorizedFields.forEach((field) => {
         setFieldError(field, "");
@@ -401,6 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // Als een veld wel is ingevuld, alleen dat ene veld inhoudelijk valideren
     if (filledField.id === "bsn-authorized-person") {
       return validateBsn(filledField);
     }
@@ -417,65 +554,116 @@ document.addEventListener("DOMContentLoaded", () => {
     field.addEventListener("blur", validateAuthorizedGroup);
   });
 
+  // Als je op reset klikt, worden alle drie de velden geleegd
   const resetBtn = $("reset-fields");
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
       authorizedFields.forEach((field) => {
         field.value = "";
+        // ook weer enabled
         field.disabled = false;
+        // en fouten verdwijnen
         setFieldError(field, "");
       });
       setGroupError("authorized-person-group-error", "");
     });
   }
 
+  /***********************/
+  /* MARK: VALIDATOR MAP */
+  /***********************/
+
+  // Hier koppel ik IDs aan de juiste validatiefunctie
+  // Dit doe ik omdat ik dan niet voor elk los veld een losse submit-code hoef te schrijven
   const validators = {
     initials: validateInitials,
+
     bsn: validateBsn,
+
     "last-name": (field) =>
       validateRequiredText(field, "Vul een achternaam in."),
+
     "date-of-death": (field) =>
       validateDate(field, "Vul een geldige overlijdensdatum in."),
+
     "conditions-date": (field) =>
       validateDate(field, "Vul een geldige datum in."),
+
     "protocol-number": validateProtocol,
+
     "initial-2": validateInitials,
+
     "last-name-2": (field) =>
       validateRequiredText(field, "Vul een achternaam in."),
+
     location: (field) =>
       validateRequiredText(field, "Vul een vestigingsplaats in."),
+
     "date-testament": (field) =>
       validateDate(field, "Vul een geldige datum in."),
+
     "initials-3": validateInitials,
+
     "last-name-3": (field) =>
       validateRequiredText(field, "Vul een achternaam in."),
+
     "name-of-institution": (field) =>
       validateRequiredText(field, "Vul een geldige naam in."),
+
     street: (field) => validateRequiredText(field, "Vul een straatnaam in."),
+
     "house-number": (field) =>
       validateRequiredText(field, "Vul een huisnummer in."),
+
     "zip-code": validatePostcode,
+
     "place-of-residence": (field) =>
       validateRequiredText(field, "Vul een woonplaats in."),
+
     "street-2": (field) =>
       validateRequiredText(field, "Vul een straatnaam in."),
+
     "house-number-2": (field) =>
       validateRequiredText(field, "Vul een huisnummer in."),
+
     "zip-code-2": validatePostcode,
+
     "place-of-residence-2": (field) =>
       validateRequiredText(field, "Vul een plaats in."),
+
     email: validateEmail,
+
     "phone-number": validateOptionalTel,
   };
+
+  /**************************************/
+  /* MARK: VALIDATORS AAN VELDEN HANGEN */
+  /**************************************/
+
+  // Voor elk veld in de validator map:
 
   Object.entries(validators).forEach(([id, validator]) => {
     const field = $(id);
     if (!field) return;
 
-    field.addEventListener("blur", () => validator(field));
-    field.addEventListener("input", () => validator(field));
+    field.addEventListener("blur", () => {
+      validator(field);
+    });
+
+    field.addEventListener("input", () => {
+      const hasError = field.getAttribute("aria-invalid") === "true";
+
+      if (hasError || shouldLiveValidate(field)) {
+        validator(field);
+      }
+    });
   });
 
+  /*******************************************/
+  /* MARK: RADIO GROUPS AAN VALIDATIE HANGEN */
+  /*******************************************/
+
+  // Alle groepen die verplicht zijn
   const radioGroups = [
     "married",
     "conditions",
@@ -487,6 +675,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "woonland",
   ];
 
+  // Daarna koppel ik aan elke radio een change en blur
+  // Zodra iemand radio button kiest of verlaat, wordt gecontroleerd of een keuze is gemaakt
   radioGroups.forEach((name) => {
     document
       .querySelectorAll(`input[type="radio"][name="${name}"]`)
@@ -500,20 +690,41 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
+  /*******************************************************/
+  /* MARK: CONDITIONELE BLOKKEN UPDATEN BIJ RADIO CHANGE */
+  /*******************************************************/
+
+  // Als iemand radio aanklikt: opnieuw kijken welke subvragen zichtbaar moeten zijn
   document.addEventListener("change", (e) => {
     if (e.target.matches('input[type="radio"]')) {
       updateConditionalVisibility();
     }
   });
 
+  /*******************************/
+  /* MARK: STARTSTATUS INSTELLEN */
+  /*******************************/
+
+  // Aan het einde van het laden startstatus instellen:
+
+  // Alle fouten verborgen
   initFieldErrors();
+  // Conditionele vragen correct zichtbaar
   updateConditionalVisibility();
+  // '1 van 3' groep juist ingesteld
   validateAuthorizedGroup();
 
+  /********************************/
+  /* MARK: HERCONTROLE BIJ SUBMIT */
+  /********************************/
+
+  // Bij verzenden doet het script:
   if (form) {
+    // Conditionele velden opnieuw goed zetten
     form.addEventListener("submit", (e) => {
       updateConditionalVisibility();
 
+      // Alle gewone validators uitvoeren
       let isFormValid = true;
 
       Object.entries(validators).forEach(([id, validator]) => {
@@ -521,15 +732,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (field && !validator(field)) isFormValid = false;
       });
 
+      // Alle radio groepen controleren
       radioGroups.forEach((name) => {
         if (!validateRadioGroup(name, "Maak een keuze.")) {
           isFormValid = false;
         }
       });
 
+      // de '1 van 3' groep controleren
       if (!validateAuthorizedGroup()) isFormValid = false;
+
+      // De landkeuze controleren
       if (!validateCountry()) isFormValid = false;
 
+      // Als één van die dingen fout is, wordt het formulier niet verstuurd
       if (!isFormValid) {
         e.preventDefault();
       }
