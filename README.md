@@ -430,10 +430,15 @@ Ik heb deze week dus grote stappen kunnen zetten in het uitwerken van mijn formu
 
 Ook heb ik het formulier nu een stuk meer interactief gemaakt met JavaScript. Ik heb deze week validatie geregeld via JS waarbij ik dus aangepaste en complexere foutmeldingen kan tonen, zoals velden waarbij slechts een van de opties ingevuld hoeft te worden.
 
+<img width="601" height="101" alt="Screenshot 2026-03-13 at 14 18 45" src="https://github.com/user-attachments/assets/0ca79142-6932-4725-b805-d06442767b4a" />
+
+<img width="610" height="305" alt="Screenshot 2026-03-13 at 14 19 31" src="https://github.com/user-attachments/assets/126a24ac-13da-4123-b760-f99fc085c8de" />
+
 Ik heb hierbij rekening gehouden met progressive enhancement. Zonder JS blijft de standaard browservalidatie actief, terwijl JS mijn eigen foutmeldingen gebruikt.
 
-Feedback docent:
+Feedback docent op 13-03: Werk nu vooral nog verder aan consistentie van de styling, verder wel mooi werk met de JavaScript gemaakt. Ook kleine details zoals de focus state bij de 1 van de 3 vraag weghalen wanneer een van de velden is ingevuld was een puntje van feedback. Deze moest ik nog grijs maken, dus dat kan er mooi bij als detail.
 
+<img width="588" height="271" alt="Screenshot 2026-03-13 at 14 21 02" src="https://github.com/user-attachments/assets/9207fd76-79b4-44c0-b81c-1be79adf3c1b" />
 
 
 
@@ -444,6 +449,7 @@ https://download.belastingdienst.nl/belastingdienst/docs/aangifte_erfbel_2025_su
 https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form#attributes
 
 https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input
+
 
 https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox
 
