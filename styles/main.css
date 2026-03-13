@@ -132,9 +132,14 @@ form {
   padding: 1rem;
 }
 
+form > fieldset {
+  padding-bottom: 1rem;
+}
+
 fieldset {
   background: var(--color-background-default);
-  margin: 0 auto 1rem;
+  margin: auto;
+  margin-top: 1rem;
   border: 0;
   width: 100%;
   max-width: 720px;
@@ -143,7 +148,7 @@ fieldset {
 }
 
 fieldset fieldset {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 }
 
 fieldset fieldset > legend {
@@ -163,7 +168,8 @@ label:has(input[type="radio"]) {
   align-items: center;
   gap: 0.5rem;
   width: 80%;
-  margin: 0.3rem auto 0.75rem;
+  margin: auto;
+  margin-top: 0.5rem;
 }
 
 /*******************************/
@@ -224,7 +230,6 @@ input:user-invalid {
   border-bottom: 2px solid var(--color-content-error);
 }
 
-
 /* JS kan [hidden] zetten, zonder JS werkt de fallback hieronder */
 
 .error {
@@ -272,7 +277,7 @@ button {
   display: block;
   width: 80%;
   margin: 1rem auto;
-  
+
   background-color: var(--color-content-interactive);
   border: none;
   border-radius: var(--border-radius-sm);

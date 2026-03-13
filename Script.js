@@ -550,8 +550,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   authorizedFields.forEach((field) => {
-    field.addEventListener("input", validateAuthorizedGroup);
-    field.addEventListener("blur", validateAuthorizedGroup);
+    field.addEventListener("blur", () => {
+      field.dataset.touched = "true";
+      validateAuthorizedGroup();
+    });
+
+    field.addEventListener("input", () => {
+      const isTouched = field.dataset.touched === "true";
+      const hasError = field.getAttribute("aria-invalid") === "true";
+
+      if (isTouched || hasError) {
+        validateAuthorizedGroup();
+      }
+    });
   });
 
   // Als je op reset klikt, worden alle drie de velden geleegd
@@ -647,13 +658,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!field) return;
 
     field.addEventListener("blur", () => {
+      field.dataset.touched = "true";
       validator(field);
     });
 
     field.addEventListener("input", () => {
       const hasError = field.getAttribute("aria-invalid") === "true";
+      const isTouched = field.dataset.touched === "true";
 
-      if (hasError || shouldLiveValidate(field)) {
+      if (isTouched && (hasError || shouldLiveValidate(field))) {
         validator(field);
       }
     });
