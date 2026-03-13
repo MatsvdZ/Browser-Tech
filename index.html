@@ -80,7 +80,7 @@
           <legend class="header">Partnerschap (1b)</legend>
 
           <fieldset aria-describedby="married-error">
-            <legend>
+            <legend class="question">
               Was de overledene getrouwd of had de overledene een geregistreerde
               partner op het moment van overlijden?
             </legend>
@@ -103,7 +103,7 @@
             data-show-when="married:yes"
             aria-describedby="conditions-error"
           >
-            <legend>
+            <legend class="question">
               Hadden de overledene en diens echtgenoot of geregistreerde partner
               huwelijkse of partnerschapsvoorwaarden laten vastleggen in een
               notariële akte?
@@ -134,7 +134,7 @@
             data-show-when="conditions:yes"
             aria-describedby="settlement-clause-error"
           >
-            <legend>
+            <legend class="question">
               Hadden de overledene en diens partner een finaal verrekenbeding?
             </legend>
 
@@ -182,7 +182,7 @@
           <legend class="header">Kinderen (1c)</legend>
 
           <fieldset aria-describedby="deceased-child-error">
-            <legend>Had de overledene kinderen?</legend>
+            <legend class="question">Had de overledene kinderen?</legend>
 
             <label>
               <input type="radio" name="deceased-child" value="no" required />
@@ -204,7 +204,7 @@
             data-show-when="deceased-child:yes"
             aria-describedby="passed-away-earlier-error"
           >
-            <legend>
+            <legend class="question">
               Is 1 van deze kinderen eerder overleden dan de overledene voor wie
               u nu aangifte doet?
             </legend>
@@ -234,7 +234,9 @@
             data-show-when="passed-away-earlier:yes"
             aria-describedby="children-of-children-error"
           >
-            <legend>Had dit overleden kind zelf kinderen?</legend>
+            <legend class="question">
+              Had dit overleden kind zelf kinderen?
+            </legend>
 
             <label>
               <input
@@ -261,7 +263,7 @@
           <legend class="header">Testament (1d)</legend>
 
           <fieldset aria-describedby="testament-error">
-            <legend>Had de overledene een testament?</legend>
+            <legend class="question">Had de overledene een testament?</legend>
 
             <label>
               <input type="radio" name="testament" value="no" required />
@@ -358,7 +360,7 @@
             id="authorized-person-group"
             aria-describedby="authorized-person-group-error"
           >
-            <legend>
+            <legend class="question">
               Vul 1 van de 3 in: het bsn of RSIN van de gemachtigde, het
               beconnummer van de adviseur of het protocolnummer van de notaris
             </legend>
@@ -421,7 +423,9 @@
           </fieldset>
 
           <fieldset>
-            <legend>Naam gemachtigde en instelling (2b)</legend>
+            <legend class="question">
+              Naam gemachtigde en instelling (2b)
+            </legend>
 
             <label for="initials-3">Voorletter(s)</label>
             <input
@@ -462,10 +466,12 @@
           </fieldset>
 
           <fieldset>
-            <legend>Adres</legend>
+            <legend class="question">Adres</legend>
 
             <fieldset aria-describedby="woonland-error">
-              <legend>Is de gemachtigde woonachtig in Nederland?</legend>
+              <legend class="question">
+                Is de gemachtigde woonachtig in Nederland?
+              </legend>
 
               <label>
                 <input type="radio" name="woonland" value="no" required />
@@ -483,7 +489,7 @@
             </fieldset>
 
             <fieldset class="conditional" data-show-when="woonland:yes">
-              <legend>Adres in Nederland</legend>
+              <legend class="question">Adres in Nederland</legend>
 
               <label for="street">Straat</label>
               <input
@@ -537,7 +543,7 @@
             </fieldset>
 
             <fieldset class="conditional" data-show-when="woonland:no">
-              <legend>Adres in het buitenland</legend>
+              <legend class="question">Adres in het buitenland</legend>
 
               <label for="street-2">Straat</label>
               <input
@@ -608,7 +614,7 @@
             </fieldset>
 
             <fieldset>
-              <legend>Contactgegevens</legend>
+              <legend class="question">Contactgegevens</legend>
 
               <label for="phone-number">Telefoonnummer</label>
               <input
