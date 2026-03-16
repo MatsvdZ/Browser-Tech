@@ -430,9 +430,42 @@ Ik heb deze week dus grote stappen kunnen zetten in het uitwerken van mijn formu
 
 Ook heb ik het formulier nu een stuk meer interactief gemaakt met JavaScript. Ik heb deze week validatie geregeld via JS waarbij ik dus aangepaste en complexere foutmeldingen kan tonen, zoals velden waarbij slechts een van de opties ingevuld hoeft te worden.
 
+<img width="601" height="101" alt="Screenshot 2026-03-13 at 14 18 45" src="https://github.com/user-attachments/assets/0ca79142-6932-4725-b805-d06442767b4a" />
+
+<img width="610" height="305" alt="Screenshot 2026-03-13 at 14 19 31" src="https://github.com/user-attachments/assets/126a24ac-13da-4123-b760-f99fc085c8de" />
+
 Ik heb hierbij rekening gehouden met progressive enhancement. Zonder JS blijft de standaard browservalidatie actief, terwijl JS mijn eigen foutmeldingen gebruikt.
 
-Feedback docent:
+Feedback docent op 13-03: Werk nu vooral nog verder aan consistentie van de styling, verder wel mooi werk met de JavaScript gemaakt. Ook kleine details zoals de focus state bij de 1 van de 3 vraag weghalen wanneer een van de velden is ingevuld was een puntje van feedback. Deze moest ik nog grijs maken, dus dat kan er mooi bij als detail.
+
+<img width="588" height="271" alt="Screenshot 2026-03-13 at 14 21 02" src="https://github.com/user-attachments/assets/9207fd76-79b4-44c0-b81c-1be79adf3c1b" />
+
+
+
+
+
+## Zevende checkout (16-03)
+### Wat heb ik vandaag gedaan?
+Ik ben vandaag begonnen met het fixen van mijn disabled state voor mijn '1 van de 3' vraag. Dit is redelijk snel gefixt en dus kan ik door met andere dingen.
+
+Ik ben door gegaan met het fixen van een aantal regex's die ik had. Ik ben begonnen met het meer vergevend maken van de voorletters invullen. Je kan nu op meer verschillende manieren voorletters invullen, met zowel kleine als grote letters, en met en zonder punten. Deze worden dan altijd automatisch naar A.B. aangepast.
+
+Ik had perongeluk ook bij de buitenlandse postcode de Nederlandse regex gezet, deze heb ik weggehaald en ook verder verbeterd met JS. Je kan nu meedere soorten manieren van een postcode invullen, en deze wordt automatisch aangepast naar het juiste format. Je kan dus en 1234 AB, 1234AB, 1234ab en 1234 ab invullen, en dan wordt deze altijd automatisch aangepast naar 1234 AB.
+
+Ook heb ik heel mijn CSS bestand even helemaal opnieuw gestructureerd.
+
+
+### Hoe lang duurde het?
+Ik heb vandaag zo'n 4 uur echt aan mijn project gewerkt. Vandaag heb ik wat minder gedaan, omdat de motivatie vandaag erg ver te zoeken was.
+
+
+###  Wat heb ik geleerd?
+Ik heb vandaag niet echt iets nieuws geleerd, maar dat is logisch omdat we deze week de puntjes op de i aan het zetten zijn.
+
+
+### Wat ga ik volgende keer doen?
+Ik ga volgende keer nog even kijken of ik nog iets aan mijn styling kan aanpassen. Verder moet ik ook nog tijd gaan spenderen aan mijn CSS project deze week.
+
 
 
 
