@@ -442,6 +442,34 @@ Feedback docent op 13-03: Werk nu vooral nog verder aan consistentie van de styl
 
 
 
+
+
+## Zevende checkout (16-03)
+### Wat heb ik vandaag gedaan?
+Ik ben vandaag begonnen met het fixen van mijn disabled state voor mijn '1 van de 3' vraag. Dit is redelijk snel gefixt en dus kan ik door met andere dingen.
+
+Ik ben door gegaan met het fixen van een aantal regex's die ik had. Ik ben begonnen met het meer vergevend maken van de voorletters invullen. Je kan nu op meer verschillende manieren voorletters invullen, met zowel kleine als grote letters, en met en zonder punten. Deze worden dan altijd automatisch naar A.B. aangepast.
+
+Ik had perongeluk ook bij de buitenlandse postcode de Nederlandse regex gezet, deze heb ik weggehaald en ook verder verbeterd met JS. Je kan nu meedere soorten manieren van een postcode invullen, en deze wordt automatisch aangepast naar het juiste format. Je kan dus en 1234 AB, 1234AB, 1234ab en 1234 ab invullen, en dan wordt deze altijd automatisch aangepast naar 1234 AB.
+
+Ook heb ik heel mijn CSS bestand even helemaal opnieuw gestructureerd.
+
+
+### Hoe lang duurde het?
+Ik heb vandaag zo'n 4 uur echt aan mijn project gewerkt. Vandaag heb ik wat minder gedaan, omdat de motivatie vandaag erg ver te zoeken was.
+
+
+###  Wat heb ik geleerd?
+Ik heb vandaag niet echt iets nieuws geleerd, maar dat is logisch omdat we deze week de puntjes op de i aan het zetten zijn.
+
+
+### Wat ga ik volgende keer doen?
+Ik ga volgende keer nog even kijken of ik nog iets aan mijn styling kan aanpassen. Verder moet ik ook nog tijd gaan spenderen aan mijn CSS project deze week.
+
+
+
+
+
 ## Bronnen
 
 https://download.belastingdienst.nl/belastingdienst/docs/aangifte_erfbel_2025_suc0602z52fol.pdf
@@ -449,7 +477,6 @@ https://download.belastingdienst.nl/belastingdienst/docs/aangifte_erfbel_2025_su
 https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form#attributes
 
 https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input
-
 
 https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox
 
