@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Make all fields 'not invalid yet'
     document.querySelectorAll("input, select, textarea").forEach((field) => {
-      field.setAttribute("aria-invalid", "false");
+      field.removeAttribute("aria-invalid");
     });
   }
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MARK: FOUTMELDING VOOR HELE GROEP */
   /*************************************/
 
-  // Wordt gebruikt voor een groep inputs, zoals radio groups
+  // Wordt gebruikt voor een groep inputs
   // bij vraag "vul 1 van de 3 in"
   function setGroupError(id, message = "") {
     const errorEl = $(id);
@@ -226,15 +226,59 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
-  // De functies hieronder gebruiken validatePattern of eigen logica:
+  /*********************************/
+  /* MARK: NORMALIZERS VOOR VELDEN */
+  /*********************************/
 
+  function normalizeInitials(value) {
+    return value
+      .replace(/[^a-zA-Z]/g, "")
+      .toUpperCase()
+      .split("")
+      .slice(0, 10)
+      .map((l) => l + ".")
+      .join("");
+  }
+
+  function normalizePostcode(value) {
+    const cleaned = value.replace(/\s+/g, "").toUpperCase();
+
+    if (cleaned.length <= 4) return cleaned;
+    return `${cleaned.slice(0, 4)} ${cleaned.slice(4, 6)}`;
+  }
+
+  function normalizeBsn(value) {
+    return value.replace(/\D/g, "");
+  }
+
+  // De functies hieronder gebruiken validatePattern of eigen logica:
   // Voorletters, controleert formaat zoals M. of M.M.
   function validateInitials(field) {
-    return validatePattern(field, {
-      requiredMessage: "Vul uw voorletter(s) in.",
-      invalidMessage: "Vul geldige voorletters in, bijvoorbeeld J. of J.P.",
-      pattern: /^([A-Z]\.\s*){1,3}$/,
-    });
+    if (!isActiveField(field)) {
+      setFieldError(field, "");
+      return true;
+    }
+
+    let value = field.value.trim();
+
+    if (field.required && isEmpty(value)) {
+      setFieldError(field, "Vul uw voorletter(s) in.");
+      return false;
+    }
+
+    value = normalizeInitials(value);
+    field.value = value;
+
+    if (!/^([A-Z]\.){1,10}$/.test(value)) {
+      setFieldError(
+        field,
+        "Vul geldige voorletters in, bijvoorbeeld J. of J.P.",
+      );
+      return false;
+    }
+
+    setFieldError(field, "");
+    return true;
   }
 
   // BSN nummer, controleert 8 of 9 cijfers
@@ -265,12 +309,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Postcode, controleert Nederlandse postcode
-  function validatePostcode(field) {
-    return validatePattern(field, {
-      requiredMessage: "Vul een postcode in.",
-      invalidMessage: "Vul een geldige postcode in, bijvoorbeeld 1234 AB.",
-      pattern: /^[1-9][0-9]{3}\s?[A-Za-z]{2}$/,
-    });
+  function validateDutchPostcode(field) {
+    if (!isActiveField(field)) {
+      setFieldError(field, "");
+      return true;
+    }
+
+    if (field.required && isEmpty(field.value)) {
+      setFieldError(field, "Vul een postcode in.");
+      return false;
+    }
+
+    field.value = normalizePostcode(field.value);
+
+    if (
+      !isEmpty(field.value) &&
+      !/^[1-9][0-9]{3}\s?[A-Z]{2}$/.test(field.value)
+    ) {
+      setFieldError(
+        field,
+        "Vul een geldige postcode in, bijvoorbeeld 1234 AB.",
+      );
+      return false;
+    }
+
+    setFieldError(field, "");
+    return true;
   }
 
   /*****************************/
@@ -626,7 +690,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "house-number": (field) =>
       validateRequiredText(field, "Vul een huisnummer in."),
 
-    "zip-code": validatePostcode,
+    "zip-code": validateDutchPostcode,
 
     "place-of-residence": (field) =>
       validateRequiredText(field, "Vul een woonplaats in."),
@@ -636,8 +700,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     "house-number-2": (field) =>
       validateRequiredText(field, "Vul een huisnummer in."),
-
-    "zip-code-2": validatePostcode,
 
     "place-of-residence-2": (field) =>
       validateRequiredText(field, "Vul een plaats in."),
@@ -731,7 +793,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MARK: HERCONTROLE BIJ SUBMIT */
   /********************************/
 
-  // Bij verzenden doet het script:
+  // Bij verzenden:
   if (form) {
     // Conditionele velden opnieuw goed zetten
     form.addEventListener("submit", (e) => {

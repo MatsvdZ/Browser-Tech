@@ -29,7 +29,7 @@
             id="initials"
             name="initials"
             required
-            pattern="([A-Z]\.\s*){1,3}"
+            pattern="([A-Z]\.\s*){1,10}"
             aria-describedby="initials-error"
           />
           <p class="error" id="initials-error">
@@ -161,6 +161,7 @@
               class="conditional"
               data-show-when="settlement-clause:yes"
             >
+              <legend>Datum huwelijkse of partnerschapsvoorwaarden</legend>
               <label for="conditions-date">
                 Datum huwelijkse of partnerschapsvoorwaarden
               </label>
@@ -171,6 +172,7 @@
                 data-required-when-visible
                 aria-describedby="conditions-date-error"
               />
+
               <p class="error" id="conditions-date-error">
                 Vul een geldige datum in.
               </p>
@@ -282,6 +284,7 @@
           </fieldset>
 
           <fieldset class="conditional" data-show-when="testament:yes">
+            <legend>Gegevens Notaris</legend>
             <label for="protocol-number">Protocolnummer notaris</label>
             <input
               type="text"
@@ -293,37 +296,36 @@
               data-required-when-visible
               aria-describedby="protocol-number-error"
             />
+
             <p class="error" id="protocol-number-error">
               Vul een geldig protocolnummer in.
             </p>
 
-            <fieldset>
-              <label for="initial-2">Voorletter(s)</label>
-              <input
-                type="text"
-                id="initial-2"
-                name="initial-2"
-                pattern="([A-Z]\.\s*){1,3}"
-                data-required-when-visible
-                aria-describedby="initial-2-error"
-              />
-              <p class="error" id="initial-2-error">
-                Vul geldige voorletters in, bijvoorbeeld J. of J.P.
-              </p>
+            <label for="initial-2">Voorletter(s)</label>
+            <input
+              type="text"
+              id="initial-2"
+              name="initial-2"
+              pattern="([A-Z]\.\s*){1,3}"
+              data-required-when-visible
+              aria-describedby="initial-2-error"
+            />
+            <p class="error" id="initial-2-error">
+              Vul geldige voorletters in, bijvoorbeeld J. of J.P.
+            </p>
 
-              <label for="prefix-2">Tussenvoegsel</label>
-              <input type="text" id="prefix-2" name="prefix-2" />
+            <label for="prefix-2">Tussenvoegsel</label>
+            <input type="text" id="prefix-2" name="prefix-2" />
 
-              <label for="last-name-2">Achternaam</label>
-              <input
-                type="text"
-                id="last-name-2"
-                name="last-name-2"
-                data-required-when-visible
-                aria-describedby="last-name-2-error"
-              />
-              <p class="error" id="last-name-2-error">Vul een achternaam in.</p>
-            </fieldset>
+            <label for="last-name-2">Achternaam</label>
+            <input
+              type="text"
+              id="last-name-2"
+              name="last-name-2"
+              data-required-when-visible
+              aria-describedby="last-name-2-error"
+            />
+            <p class="error" id="last-name-2-error">Vul een achternaam in.</p>
 
             <label for="location">Vestigingsplaats</label>
             <input
@@ -347,6 +349,7 @@
               data-required-when-visible
               aria-describedby="date-testament-error"
             />
+
             <p class="error" id="date-testament-error">
               Vul een geldige datum in.
             </p>
@@ -432,7 +435,7 @@
               type="text"
               id="initials-3"
               name="initials-3"
-              pattern="([A-Z]\.\s*){1,3}"
+              pattern="([A-Z]\.\s*){1,10}"
               aria-describedby="initials-3-error"
             />
             <p class="error" id="initials-3-error">
@@ -575,7 +578,6 @@
                 type="text"
                 id="zip-code-2"
                 name="zip-code-2"
-                pattern="[1-9][0-9]{3}\s?[A-Za-z]{2}"
                 data-required-when-visible
                 aria-describedby="zip-code-2-error"
               />

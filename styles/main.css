@@ -1,5 +1,5 @@
 /*************************/
-/* MARK: DEFAULT STYLING */
+/* MARK: FONTS & TOKENS  */
 /*************************/
 @font-face {
   font-family: nssans;
@@ -12,6 +12,7 @@
 }
 
 :root {
+  /* Typography */
   --heading-1: 28px;
   --heading-2: 24px;
   --heading-3: 20px;
@@ -27,6 +28,7 @@
   --font-weight: normal;
   --line-height: 1.5;
 
+  /* Colors */
   --color-content-default: #252528;
   --color-content-emphasis: #0b3680;
   --color-content-subtle: #73747a;
@@ -52,25 +54,33 @@
   --color-border-input-default: #c4c5cb;
   --color-border-input-hover: #0063d3;
 
+  /* Radius */
   --border-radius-sm: 3px;
   --border-radius-nm: 6px;
   --border-radius-l: 12px;
   --border-radius-f: 9999px;
 
+  /* Border widths */
   --border-width-thin: 1px;
   --border-width-medium: 2px;
   --border-width-thick: 4px;
 }
 
+/******************/
+/* MARK: RESET    */
+/******************/
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-size: var(--body-text-m);
   color: var(--color-content-default);
   line-height: var(--line-height);
-  box-sizing: border-box;
 }
 
+/******************/
+/* MARK: PAGE     */
+/******************/
 body {
   background: var(--color-brand-primary);
   font-family:
@@ -88,54 +98,55 @@ body {
 }
 
 /*********************************/
-/* MARK: SCHOOL PROJECT WARNING */
+/* MARK: SCHOOL PROJECT WARNING  */
 /*********************************/
-
 header {
+  padding: 1rem;
+  background: red;
+  color: white;
+  text-align: center;
   font-size: 2rem;
   font-weight: bold;
+}
+
+/***********************/
+/* MARK: TYPOGRAPHY    */
+/***********************/
+h1 {
+  display: block;
+  margin-top: 1rem;
   padding: 1rem;
-  color: white;
-  background: red;
+  color: var(--color-content-emphasis);
+  font-family: nssans-bold;
+  font-size: var(--heading-1);
   text-align: center;
 }
 
-/************************/
-/* MARK: HEADER STYLING */
-/************************/
-
-h1 {
-  display: block;
-  padding: 1rem;
-  margin-top: 1rem;
-  color: var(--color-content-emphasis);
-  font-size: var(--heading-1);
-  text-align: center;
+legend {
+  padding-top: 0.5rem;
   font-family: nssans-bold;
+  font-size: var(--heading-3);
 }
 
 .header {
-  font-size: var(--heading-2);
-  border-top-left-radius: var(--border-radius-nm);
-  border-top-right-radius: var(--border-radius-nm);
-  font-family: nssans-bold;
   display: block;
   width: 100%;
+  padding: 1rem;
+  border-top-left-radius: var(--border-radius-nm);
+  border-top-right-radius: var(--border-radius-nm);
   background: var(--color-brand-secondary);
   color: white;
-  padding: 1rem;
+  font-family: nssans-bold;
+  font-size: var(--heading-2);
 }
 
 .question {
   margin-left: 1rem;
 }
 
-legend {
-  font-family: nssans-bold;
-  font-size: var(--heading-3);
-  padding-top: 0.5rem;
-}
-
+/***********************/
+/* MARK: FORM LAYOUT   */
+/***********************/
 form {
   padding: 1rem;
   padding-top: 0;
@@ -146,14 +157,14 @@ form > fieldset {
 }
 
 fieldset {
-  background: var(--color-background-default);
+  width: 100%;
+  max-width: 720px;
   margin: auto;
   margin-top: 1rem;
   border: 0;
-  width: 100%;
-  max-width: 720px;
   border-radius: var(--border-radius-nm);
   overflow: hidden;
+  background: var(--color-background-default);
 }
 
 fieldset fieldset {
@@ -161,9 +172,9 @@ fieldset fieldset {
 }
 
 fieldset fieldset > legend {
+  margin: 0 0 0.5rem 0;
   background: none;
   color: var(--color-content-emphasis);
-  margin: 0 0 0.5rem 0;
 }
 
 label {
@@ -181,29 +192,28 @@ label:has(input[type="radio"]) {
   margin-top: 0.5rem;
 }
 
-/*******************************/
-/* MARK: SHOW / HIDE QUESTIONS */
-/*******************************/
-
+/********************************/
+/* MARK: CONDITIONAL QUESTIONS  */
+/********************************/
 .js .conditional {
   display: none;
 }
 
 .js .conditional.is-visible {
   display: block;
+  animation: slideDown 0.5s ease;
 }
 
 /***********************/
-/* MARK: INPUT STYLING */
+/* MARK: FORM INPUTS   */
 /***********************/
-
 input {
   display: block;
   width: 80%;
   margin: 0 auto 0.35rem;
   padding: 0.3rem;
-  border-radius: var(--border-radius-nm);
   border: var(--border-width-thin) solid var(--color-border-input-default);
+  border-radius: var(--border-radius-nm);
   background: white;
 }
 
@@ -220,6 +230,13 @@ input:required {
   border-left: 4px solid var(--color-content-info);
 }
 
+input:disabled {
+  background: #f7f7f8;
+  color: var(--color-content-subtle);
+  border-color: var(--color-border-default);
+  cursor: not-allowed;
+}
+
 input[type="radio"] {
   width: auto;
   margin: 0;
@@ -228,19 +245,24 @@ input[type="radio"] {
   outline-offset: 2px;
 }
 
-/****************************************/
-/* MARK: VALIDATION - CSS FALLBACK + JS */
-/****************************************/
+/************************/
+/* MARK: VALIDATION     */
+/************************/
+
+/* Fallback zonder JS */
 input:user-valid {
-  border-bottom: 2px solid var(--color-content-success);
+  border: 2px solid var(--color-content-success);
 }
 
 input:user-invalid {
-  border-bottom: 2px solid var(--color-content-error);
+  border: 2px solid var(--color-content-error);
 }
 
-/* JS kan [hidden] zetten, zonder JS werkt de fallback hieronder */
+input:not([type="radio"]):user-invalid + .error {
+  display: block;
+}
 
+/* Error teksten */
 .error {
   display: none;
   width: 80%;
@@ -249,14 +271,8 @@ input:user-invalid {
   font-size: var(--body-text-s);
 }
 
-/* groepsfouten iets meer ruimte */
 .group-error {
   margin-top: 0.2rem;
-}
-
-/* CSS fallback zonder JS: toon foutmelding na user interaction */
-input:not([type="radio"]):user-invalid + .error {
-  display: block;
 }
 
 /* JS gestuurde errors */
@@ -268,41 +284,36 @@ input:not([type="radio"]):user-invalid + .error {
   display: block;
 }
 
-/* Visuele foutstatus via JS */
+/* JS gestuurde valid states */
 input[aria-invalid="true"]:not([type="radio"]) {
   border-color: var(--color-content-error);
 }
 
-/* Visuele successtatus alleen voor gewone velden */
 input[aria-invalid="false"]:not([type="radio"]):user-valid {
   border-color: var(--color-content-success);
 }
 
-/************************/
-/* MARK: BUTTON STYLING */
-/************************/
-
+/***********************/
+/* MARK: BUTTONS       */
+/***********************/
 button {
   display: block;
   width: 80%;
   margin: 1rem auto;
-
-  background-color: var(--color-content-interactive);
+  padding: 0.625rem 1.125rem;
   border: none;
   border-radius: var(--border-radius-sm);
+  background-color: var(--color-content-interactive);
   box-shadow: inset 0 -0.125rem 0 var(--color-content-interactive-hover);
   color: white;
   font-size: var(--body-text-m);
   font-weight: 400;
   line-height: 1.5625;
-  padding: 0.625rem 1.125rem;
-  position: relative;
   text-align: center;
   text-decoration: none;
-  transition: box-shadow 0.15s ease-in-out;
-  vertical-align: top;
   white-space: nowrap;
   cursor: pointer;
+  transition: box-shadow 0.15s ease-in-out;
 }
 
 button:hover {
@@ -319,4 +330,27 @@ button[type="submit"] {
   width: 100%;
   max-width: 720px;
   margin: 1rem auto;
+}
+
+/***********************/
+/* MARK: FOOTER        */
+/***********************/
+footer {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/***********************/
+/* MARK: ANIMATIONS    */
+/***********************/
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
