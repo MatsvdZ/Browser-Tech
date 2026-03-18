@@ -441,6 +441,111 @@ Feedback docent op 13-03: Werk nu vooral nog verder aan consistentie van de styl
 <img width="588" height="271" alt="Screenshot 2026-03-13 at 14 21 02" src="https://github.com/user-attachments/assets/9207fd76-79b4-44c0-b81c-1be79adf3c1b" />
 
 
+## Weekly geek (12-03)
+
+**Robbert Boersma**
+
+**Ff formulieren maken met NL design system richtijnen**
+
+### Opbouw van een formulier:
+
+    - Introductietekst
+    - Informatie vragen die nodig is
+    - Gebruiker kan voor inzending de ingevoerde waardes controleren, wijzigen of ongedaan maken
+    - Na “volgende” of “verzenden” verschijnt een samenvatting van alle fouten
+    - Na verzenden verschijnt een duidelijke bevestiging
+
+    - Het is erg fijn als het lukt om een formulier op te slaan en later verder te gaan.
+
+    - Verplichte velden goed aangeven
+    - Uitleggen waarom je specifieke informatie nodig hebt
+    - Gebruiker dezelfde informatie niet twee keer vragen
+    - Geen jargon of gekke afkorting(en)
+
+### Design van componenten:
+
+    - Check het kleurcontrast van componenten. De randen moeten voldoende contrast hebben met de achtergrondkleur
+    - Check de kleurcontrasten van subtielere tekst. De tekst van de beschrijvingen en van de placeholder moet voldoende contrast hebben met de achtergrondkleur.
+    - Zijn de componenten groot genoeg? 44x44px is je vriend.
+
+### Design van het formulier:
+
+    - Staan er buttons aan het eind van de regel, zoals “volgende”? Plaats de buttons aan het begin van de regel, waar iedereen ze kan vinden.
+    - De voortgang wordt getoond boven het formulier in tekst, bijvoorbeeld “stap 2 van 4”
+    - De navigatie (volgende, vorige, annuleren) is consistent in elke stap.
+    - Het is duidelijk in welke stap het formulier daadwerkelijk wordt verzonden.
+    - Elk invoerveld heeft een zichtbaar label dat boven het invoerveld staat. Alleen bij de zoekfunctie is de label eventueel vervangen door alleen een placeholder
+    - Er staat ‘verplicht’ of ‘niet verplicht’ in tekst, niet alleen met het asterix teken.
+
+### Flow van het formulier:
+
+    - Staan de formuliervelden in logische volgorde?
+    - Zijn er meerdere contactmogelijkheden om hulp te krijgen? Zorg voor meerdere manieren zodat het voor iedereen mogelijk is contact op te nemen, bijvoorbeeld email, chat en 		telefoon.
+    - Wordt hulp op meerdere plekke aangeboden?
+    - De voortgang wordt getoond boven het formulier in tekst.
+
+### Labels:
+
+    - Gebruik een <label for="input-id”> voor het formulierveld, en zorg dat alles een gekoppeld label heeft.
+    - Andere code voor een label, zoals aria-label=“” of title="" moeten in elk geval de zichtbare labeltekst bevatten, anders werkt het niet met spraakbesturing.
+    - “Voorna(a)m(en)” Nope! Voornaam (1 of meerdere) Yep!
+
+### Makkelijker invullen
+
+    - Als de gebruiker is ingelogd, dan worden bekende gegevens vooral ingevuld.
+    - Knippen en plakken is overal toegestaan
+    - Controleer of de browser autocomplete aanbiedt om velden vooraf in te vullen, waar je dat verwacht.
+
+### Beschrijvingen bij een veld
+
+    - Belangrijke uitleg is altijd zichtbaar. Essientiële informatie staat in een description of in de labeltekst, niet alleen in een placeholder tooltip.
+    - Extra teksten bij een formulierveld zijn gekoppeld met aria-describedby op het formulier-element, zoals <input> of <select>
+
+- Beschrijving, foutmeldingen
+- Feedback zoals ’42 van de 100 tekens’ of ‘je wachtwoord voldoet aan de eisen’
+- De beschrijving en foutmeldingen van Checkbox Group en Radio Group zijn gekoppeld aan de <fieldset> niet aria-describedby
+
+### Controleren
+
+    - De laatste stap toont een samenvatting van alle ingevoerde gegevens.
+    - Het formulier biedt de mogelijkheid om een inzending te controleren, te wijzigen of ongedaan te maken.
+    - Voorkom met <bdi translate="no”> dat wat de gebruiker zelf heeft ingevoerd, wordt vertaald. Dit is met name op de controle-pagina en de bevestigingspagina.
+
+### Bevestiging
+
+    - Is er een duidelijke bevestiging? Een goede bevestiging vermeldt welke informatie is verstuurd.
+
+### Validatie
+
+    - De regels voor een invoerveld zijn vooraf duidelijk, bijvoorbeeld: welke tekens, of hoe lang de tekst mag zijn.
+    - Boven het formulier staat uitleg over hoe de verplichte of niet verplichte velden zijn aangemerkt.
+
+### Design van foutmeldingen
+
+    - Foutmeldingen staan bij het betreffende veld
+
+### Toetsenbord
+
+    - Doorloop het formulier volledig met alleen het toetsenbord. De volgende dingen moeten goed werken:
+
+- Elk invoerveld, elke button en elke link is bereikbaar met de tab toets.
+- Tabvolgorde is logisch
+  - De focus indicator is goed zichtbaar
+  - Sommige componenten werken met andere toetsen dan tab.
+
+### Screenreader - invullen
+
+    - Het label van elk veld wordt voorgelezen als het veld focus krijgt.
+    - De beschrijving van een veld wordt voorgelezen als het veld focus krijgt.
+    - Verplichte velden worden verplicht aangeduid bij het voorlezen.
+    - Foutmeldingen en feedback onderbreken de gebruiker niet bij het invullen.
+    - Feedback over invoer (bijvoorbeeld: of ‘je wachtwoord voldoet aan de eisen’) worden automatisch voorgelezen, zonder dat de gebruiker er naartoe hoeft te navigeren
+
+### Screenreader - Navigatie
+
+    - De voortgang is hoorbaar voor screenreadergebruikers: “stop 2 van 4” of vergelijkbaar.
+    - Na verzenden verschijnt een duidelijke bevestiging dat het formulier succesvol is verzonden.
+    - Positieve statusberichten na het versturen (zoals “formulier verzonden”)
 
 
 
