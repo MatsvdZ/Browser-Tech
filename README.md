@@ -480,7 +480,7 @@ Feedback docent op 13-03: Werk nu vooral nog verder aan consistentie van de styl
 ### Flow van het formulier:
 
     - Staan de formuliervelden in logische volgorde?
-    - Zijn er meerdere contactmogelijkheden om hulp te krijgen? Zorg voor meerdere manieren zodat het voor iedereen mogelijk is contact op te nemen, bijvoorbeeld email, chat en 		telefoon.
+    - Zijn er meerdere contactmogelijkheden om hulp te krijgen? Zorg voor meerdere manieren zodat het voor iedereen mogelijk is contact op te nemen, bijvoorbeeld email, chat en telefoon.
     - Wordt hulp op meerdere plekke aangeboden?
     - De voortgang wordt getoond boven het formulier in tekst.
 
@@ -575,7 +575,76 @@ Ik ga volgende keer nog even kijken of ik nog iets aan mijn styling kan aanpasse
 
 
 
+
+
+
+
+
+## Achtste checkout (18-03)
+### Wat heb ik vandaag gedaan?
+Ik heb vandaag de finishing touches gemaakt voor BT. Ik heb een verstuurd pagina gemaakt, waarop staat dat het formulier succesvol is verstuurd. Dit is toch iets wat mij handig leek om te hebben, en het is niet heel veel werk om dat in elkaar te zetten.
+
+Ook heb ik snel even een icoontje van de NS site af weten te halen en deze bij mijn banner geplakt, alsof het een waarschuwing is op de NS site. 
+
+Ook heb ik een kleine bugfix gedaan waar je niet met backspace de letters kon verwijderen na het invullen van je initialen.
+
+Ik heb ook nog even een 'vraag 1 van 5' toegevoegd bij elke vraag, zodat de gebruiker weet hoever in het process ze ongeveer zitten.
+
+### Hoe lang duurde het?
+Ik heb vandaag aan zowel CSS als BT gewerkt. In totaal heb ik ongeveer 1,5 uur aan BT gewerkt.
+
+
+###  Wat heb ik geleerd?
+Ik heb vandaag niks nieuws geleerd. Ik heb de puntjes op de i gezet en de laatste fixes gedaan waar ik nog tijd voor had.
+
+
+### Wat ga ik volgende keer doen?
+De beoordeling!
+
+
+
+### Final result!
+
+<img width="1728" height="867" alt="Screenshot 2026-03-18 at 15 19 30" src="https://github.com/user-attachments/assets/2564985a-72d8-4d61-ad81-73e73fce9acf" />
+
+<img width="1728" height="941" alt="Screenshot 2026-03-18 at 15 19 57" src="https://github.com/user-attachments/assets/5688d4ed-f598-4af1-9b06-b910cac32f73" />
+
+<img width="1728" height="820" alt="Screenshot 2026-03-18 at 15 20 18" src="https://github.com/user-attachments/assets/18d1b244-451a-4da5-b0f4-eacf4a562478" />
+
+<img width="1728" height="963" alt="Screenshot 2026-03-18 at 15 20 34" src="https://github.com/user-attachments/assets/d6d3e11f-c8e4-45b4-a009-4e02e615ec6d" />
+
+Dit is het dan! Mijn laatste versie van mijn formulier voor Browser technologies. Ik ben opzich tevreden over dewerking van het formulier. De styling had nog wel wat extra's kunnen gebruiken, maar ik vind dat de werking toch echt net wat belangrijker is. 
+
+
+### Belangrijkste functies
+Hier komen een aantal belangrijke functies op een rij:
+
+- Validatie opgebouwd vanaf HTML, naar CSS en HEEL VEEL validatie via JavaScript. Elk veld heeft zijn eigen validatie bericht.
+- Uitklapbare vragen die reageren op het gegeven antwoord. Deze regelt ook of de vragen required of niet zijn.
+- Alle datavelden kunnen niet de toekomst in, en overlijdensdatum tot maximaal 20 maanden terug.
+- Bij de '1 van de 3' vraag worden de andere velden dissabled na het invullen.
+- Bij de landcodes staat een lijst waarin je op landen, en op landcodes kan zoeken, deze selecteren, en zorgen dat alleen de landcode wordt opgeslagen.
+- Volledige NS styling die gebruik maakt van de NS styleguide.
+- Formulier verstuurd scherm, om zo de gebruiker te informeren dat het formulier succesvol is ingevuld en is ontvangen.
+- Een 'vraag 1 van de 5' bij elke vraag, om de gebruiker te tonen hoever diegene is in het invul proces. 
+
+
+### Wat ging goed, wat was lastig, en waar ben ik het meest trots op?
+Ik heb tijdens dit vak de grote uitdaging aangegaan om lekker veel aan de slag te gaan met JavaScript. Dit heb ik gedaan vanwege de vele en uitgebreide mogelijkheden die JavaScript biedt voor dit soort complexere formulieren. Ik ben dan ook wel erg trots over mijn uitgebreide validatie, en dit is dan ook echt het toppunt van mijn formulier, al zeg ik het zelf.
+
+HTML was iets waarvan ik aan het begin dacht dat dat wel het makkelijkste deel zou zijn bleek alleen toch wel wat complexer dan dat ik in eerste instantie dacht. Zo heb ik in de loop van de weken nog een aantal keer tweaks moeten doen aan de HTML om dit ook netjes te krijgen en validatie toe te voegen hierin.
+
+
+
+### Welke experimenten heb ik geprobeerd die mislukt zijn?
+Ondanks de vele JavaScript code, is het nog niet helemaal compleet of volledig hoe ik het wil hebben. Er zijn nog een aantal kleine bugs, maar hier heb ik helaas geen tijd voor gehad om deze nog te fixen. Ondanks pogingen tot het fixen is dit nogsteeds een ongoing probleem, maar zo zit coderen nou eenmaal in elkaar.
+
+
+
+
 ## Bronnen
+
+https://www.ns.nl/
 
 https://download.belastingdienst.nl/belastingdienst/docs/aangifte_erfbel_2025_suc0602z52fol.pdf
 
@@ -608,3 +677,8 @@ https://stackoverflow.com/questions/17898523/regular-expression-for-dutch-zip-po
 https://www.google.com/search?q=hoe+lang+na+overlijden+aangifte+erfbelasting&rlz=1C5CHFA_enNL1083NL1084&oq=hoelang+na+overlijden+aan&gs_lcrp=EgZjaHJvbWUqCQgBEAAYDRiABDIGCAAQRRg5MgkIARAAGA0YgAQyCAgCEAAYDRgeMgoIAxAAGAoYFhgeMggIBBAAGBYYHjIKCAUQABgIGA0YHjIKCAYQABgIGA0YHjIKCAcQABiABBiiBDIKCAgQABiABBiiBDIKCAkQABiABBiiBNIBCTIxMzU1ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
 
 https://briefs.video/videos/what-happened-to-text-inputs/
+
+BRON: ChatGPT 
+PROMPT: Kan je voor mij een nieuwe pagina maken, die zegt: formulier verstuurd! Een standaard layout
+
+
