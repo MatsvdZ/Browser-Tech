@@ -66,9 +66,9 @@
   --border-width-thick: 4px;
 }
 
-/******************/
-/* MARK: RESET    */
-/******************/
+/***************/
+/* MARK: RESET */
+/***************/
 * {
   margin: 0;
   padding: 0;
@@ -78,13 +78,15 @@
   line-height: var(--line-height);
 }
 
-/******************/
-/* MARK: PAGE     */
-/******************/
+/**************/
+/* MARK: PAGE */
+/**************/
 body {
   background: var(--color-brand-primary);
   font-family:
     nssans,
+    Arial,
+    Helvetica,
     sans-serif,
     -apple-system,
     BlinkMacSystemFont,
@@ -97,21 +99,38 @@ body {
     "Helvetica Neue";
 }
 
-/*********************************/
-/* MARK: SCHOOL PROJECT WARNING  */
-/*********************************/
+/********************************/
+/* MARK: SCHOOL PROJECT WARNING */
+/********************************/
+
 header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
   padding: 1rem;
   background: red;
-  color: white;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
 }
 
-/***********************/
-/* MARK: TYPOGRAPHY    */
-/***********************/
+header p {
+  color: white;
+  font-size: 2rem;
+}
+
+.warning-icon svg {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+}
+
+.warning-icon svg * {
+  fill: white;
+}
+
+/********************/
+/* MARK: TYPOGRAPHY */
+/********************/
 h1 {
   display: block;
   margin-top: 1rem;
@@ -123,7 +142,6 @@ h1 {
 }
 
 legend {
-  padding-top: 0.5rem;
   font-family: nssans-bold;
   font-size: var(--heading-3);
 }
@@ -144,9 +162,9 @@ legend {
   margin-left: 1rem;
 }
 
-/***********************/
-/* MARK: FORM LAYOUT   */
-/***********************/
+/*********************/
+/* MARK: FORM LAYOUT */
+/*********************/
 form {
   padding: 1rem;
   padding-top: 0;
@@ -192,9 +210,9 @@ label:has(input[type="radio"]) {
   margin-top: 0.5rem;
 }
 
-/********************************/
-/* MARK: CONDITIONAL QUESTIONS  */
-/********************************/
+/*******************************/
+/* MARK: CONDITIONAL QUESTIONS */
+/*******************************/
 .js .conditional {
   display: none;
 }
@@ -204,9 +222,9 @@ label:has(input[type="radio"]) {
   animation: slideDown 0.5s ease;
 }
 
-/***********************/
-/* MARK: FORM INPUTS   */
-/***********************/
+/*********************/
+/* MARK: FORM INPUTS */
+/*********************/
 input {
   display: block;
   width: 80%;
@@ -224,7 +242,6 @@ input:hover {
 input:focus {
   outline: 2px solid var(--color-content-interactive);
   outline-offset: 2px;
-
 }
 
 input:required {
@@ -246,9 +263,9 @@ input[type="radio"] {
   outline-offset: 2px;
 }
 
-/************************/
-/* MARK: VALIDATION     */
-/************************/
+/********************/
+/* MARK: VALIDATION */
+/********************/
 
 /* Fallback zonder JS */
 input:user-valid {
@@ -314,7 +331,10 @@ button {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: box-shadow 0.15s ease-in-out;
+  transition:
+    box-shadow 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    transform 0.1s ease;
 }
 
 button:hover {
@@ -333,17 +353,17 @@ button[type="submit"] {
   margin: 1rem auto;
 }
 
-/***********************/
-/* MARK: FOOTER        */
-/***********************/
+/****************/
+/* MARK: FOOTER */
+/****************/
 footer {
   margin-bottom: 1rem;
   text-align: center;
 }
 
-/***********************/
-/* MARK: ANIMATIONS    */
-/***********************/
+/********************/
+/* MARK: ANIMATIONS */
+/********************/
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -354,4 +374,11 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.note {
+  display: block;
+  font-size: 14px;
+  margin: 0 auto;
+  width: 80%;
 }
