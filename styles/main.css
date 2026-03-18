@@ -147,7 +147,9 @@ legend {
 }
 
 .header {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 1rem;
   border-top-left-radius: var(--border-radius-nm);
@@ -160,6 +162,10 @@ legend {
 
 .question {
   margin-left: 1rem;
+}
+
+span {
+  color: var(--color-brand-primary);
 }
 
 /*********************/
