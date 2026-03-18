@@ -1,8 +1,13 @@
 // HTML krijgt JS class om anders te stijlen met en zonder JS
 document.documentElement.classList.add("js");
 
+// BRONNEN:
+// https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting
+// https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement
+
+// BRON: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 document.addEventListener("DOMContentLoaded", () => {
-  // Als JS laad, geef de form dan novalidate
+  // Als JS laad, geef de form dan novalidate en haalt standaard browser error weg.
   const form = document.querySelector("form");
 
   if (form) {
@@ -19,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Checkt alleen getoonde velden, checkt niet verstopte velden
   const isActiveField = (field) => field && !field.disabled;
-  const $ = (id) => document.getElementById(id);
+  const $ = (id) => document.getElementById(id); // helper
 
   // Initialiseer alle errors
   function initFieldErrors() {
@@ -28,8 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
       el.hidden = true;
     });
 
-    // Make all fields 'not invalid yet'
+    // Maakt alle velden 'nog niet invalid'
     document.querySelectorAll("input, select, textarea").forEach((field) => {
+      // BRON: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-invalid
       field.removeAttribute("aria-invalid");
     });
   }
@@ -40,21 +46,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Zet custom validity op het veld
   function setFieldError(field, message = "") {
-    if (!field) return;
+    if (!field) return; // als het veld niet bestaat, stop
 
-    // Zet aria-invalid op true of false
-    field.setCustomValidity(message);
-    field.setAttribute("aria-invalid", message ? "true" : "false");
+    // Native browser validatie instellen
+    // BRON: Workshop victor voor custom validation
+    field.setCustomValidity(message); // Als message leeg is, veld is geldig. Wel tekst dus ongeldig
+    field.setAttribute("aria-invalid", message ? "true" : "false"); // Zet aria-invalid op true of false voor screenreaders
 
-    // Zoekt de gekoppelde .error via aria-describedbt
+    // Zoekt de gekoppelde .error via aria-describedby
     const errorId = (field.getAttribute("aria-describedby") || "")
-      .split(" ")
+      .split(" ") // omdat je meerdere ID's kunt hebben
       .find(
-        (id) => id.endsWith("-error") && id !== "authorized-person-group-error",
+        (id) => id.endsWith("-error") && id !== "authorized-person-group-error", // sluit deze groepserror uit, behandel ik apart
       );
 
     // Toont of verbergt die foutmelding
-    const errorEl = errorId ? $(errorId) : null;
+    const errorEl = errorId ? $(errorId) : null; // $ is dus de helper die ik eerder gemaakt heb
 
     if (errorEl) {
       errorEl.textContent = message;
@@ -69,10 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Wordt gebruikt voor een groep inputs
   // bij vraag "vul 1 van de 3 in"
   function setGroupError(id, message = "") {
-    const errorEl = $(id);
+    const errorEl = $(id); // Zoekt het error element, bijv: <p id="married-error"></p>
     if (!errorEl) return;
 
-    errorEl.textContent = message;
+    errorEl.textContent = message; // Zet de error message
     errorEl.hidden = !message;
   }
 
@@ -82,18 +89,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (field.type === "radio") {
       field.checked = false;
     } else {
-      field.value = "";
+      field.value = ""; // input leegmaken
     }
 
-    field.setCustomValidity("");
-    field.setAttribute("aria-invalid", "false");
+    field.setCustomValidity(""); // veld weer geldig maken
+    field.setAttribute("aria-invalid", "false"); // visuele state reset, haalt dus rode border weg
   }
 
   // Zoek welke radio met dezelfde name is aangeklikt en geef de value terug
   // bijv: name="married" dan is gekozen waarde: ="yes"
   function getRadioValue(name) {
     return (
-      document.querySelector(`input[type="radio"][name="${name}"]:checked`)
+      document.querySelector(`input[type="radio"][name="${name}"]:checked`) // Zoekt radio met juiste naam die checked is
         ?.value ?? null
     );
   }
@@ -101,30 +108,39 @@ document.addEventListener("DOMContentLoaded", () => {
   /***************************************/
   /* MARK: CONDITIONALE VRAGEN SHOW/HIDE */
   /***************************************/
-
+  // Zorgt ervoor de de vragen standaard verstopt zijn en pas zichtbaar worden wanneer een radio input hier om vraagt
   function updateConditionalVisibility() {
+    // loop door alle conditionele blokken
     conditionalBlocks.forEach((block) => {
+      // lees de voorwaarde uit HTML, bijv: data-show-when="married:yes"
       const [fieldName, rawValues] = block.dataset.showWhen.trim().split(":");
       if (!fieldName || !rawValues) return;
 
+      // pak de gekozen radio waarde
       const shouldShow = rawValues
         .split(",")
         .map((value) => value.trim())
         .includes(getRadioValue(fieldName));
 
+      // toont of verbergt het blok als shouldShow = true en anders display: none
       block.classList.toggle("is-visible", shouldShow);
 
+      // voor alle inputs in dat blok:
       block.querySelectorAll("input, select, textarea").forEach((field) => {
+        // Als blok zichtbaar is, field.disabled = false
         field.disabled = !shouldShow;
 
+        // Als blok verborgen is, wis waarde, verwijder validatie, gebruiker kan niks meer met dat blok
+        // Dit voorkomt bugs bij submit
         if (!shouldShow) {
           resetField(field);
           field.removeAttribute("required");
+          // Alleen velden met data-required-when-visible krijgen required
         } else if (field.dataset.requiredWhenVisible !== undefined) {
           field.setAttribute("required", "");
         }
       });
-
+      // Alle foutmeldingen resetten zodat blok leeg opent
       block.querySelectorAll(".error").forEach((errorEl) => {
         errorEl.hidden = true;
         errorEl.textContent = "";
@@ -158,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return value.length >= 6;
     }
 
-    // Postcode alleen live valideren vanaf 124AB, spatie telt niet mee
+    // Postcode alleen live valideren vanaf 1234AB, spatie telt niet mee
     if (field.id === "zip-code" || field.id === "zip-code-2") {
       return value.replace(/\s/g, "").length >= 6;
     }
@@ -177,6 +193,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Controleert of het veld actief is
   function validateRequiredText(field, message) {
+    // checkt of het veld actief is
+    // Als veld disabled is, geen foutmelding
     if (!isActiveField(field)) {
       setFieldError(field, "");
       return true;
@@ -185,10 +203,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Controleert of het veld verplicht is
     if (field.required && isEmpty(field.value)) {
       setFieldError(field, message);
+      // Als field required EN leeg is, fout
       return false;
     }
 
-    // Is het veld leeg? Zo niet, wordt er een foutmelding gezet
+    // Geen problemen? verwijder foutmelding
     setFieldError(field, "");
     return true;
   }
@@ -202,14 +221,15 @@ document.addEventListener("DOMContentLoaded", () => {
     field,
     { requiredMessage, invalidMessage, pattern },
   ) {
+    // is het veld actief? als veld dissabled is, geen error
     if (!isActiveField(field)) {
       setFieldError(field, "");
       return true;
     }
-
+    // Haalt inut op zonder spaties voor/achter
     const value = field.value.trim();
 
-    // Als het verplicht en leeg is, stuur requiredMessage
+    // Als het verplicht en leeg is, toon requiredMessage
     if (field.required && isEmpty(value)) {
       setFieldError(field, requiredMessage);
       return false;
@@ -221,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
-    // Anders -> veld is geldig
+    // Anders, veld is geldig
     setFieldError(field, "");
     return true;
   }
@@ -229,26 +249,26 @@ document.addEventListener("DOMContentLoaded", () => {
   /*********************************/
   /* MARK: NORMALIZERS VOOR VELDEN */
   /*********************************/
-
+  // Meerdere manieren van initialen accepteren: J.P. of jp of j p ect
   function normalizeInitials(value) {
     return value
-      .replace(/[^a-zA-Z]/g, "")
-      .toUpperCase()
-      .split("")
-      .slice(0, 10)
-      .map((l) => l + ".")
-      .join("");
+      .replace(/[^a-zA-Z]/g, "") // verwijder alles behalve letters
+      .toUpperCase() // maak hoofdletters
+      .split("") // split in letters ["J", "P"]
+      .slice(0, 10) // max 10 letters
+      .map((l) => l + ".") // voeg punt toe
+      .join(""); // voeg samen
   }
-
+  // Nederlandse postcode normalisatie
   function normalizePostcode(value) {
-    const cleaned = value.replace(/\s+/g, "").toUpperCase();
+    const cleaned = value.replace(/\s+/g, "").toUpperCase(); // verwijder spaties + hoofdletters
 
-    if (cleaned.length <= 4) return cleaned;
-    return `${cleaned.slice(0, 4)} ${cleaned.slice(4, 6)}`;
+    if (cleaned.length <= 4) return cleaned; // eerste deel (1234)
+    return `${cleaned.slice(0, 4)} ${cleaned.slice(4, 6)}`; // maakt 1234ab naar 1234 AB
   }
-
+  // BSN normalisatie
   function normalizeBsn(value) {
-    return value.replace(/\D/g, "");
+    return value.replace(/\D/g, ""); // verwijdert alles behalve cijfers
   }
 
   // De functies hieronder gebruiken validatePattern of eigen logica:
@@ -265,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setFieldError(field, "Vul uw voorletter(s) in.");
       return false;
     }
-
+    // wel iets ingevuld maar voldoet niet aan formaat, error
     if (!isEmpty(value) && !/^([A-Z]\.){1,10}$/.test(value)) {
       setFieldError(
         field,
@@ -305,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Postcode, controleert Nederlandse postcode
+  // controleert Nederlandse postcode
   function validateDutchPostcode(field) {
     if (!isActiveField(field)) {
       setFieldError(field, "");
@@ -317,8 +337,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
+    // fix invoer automatisch
     field.value = normalizePostcode(field.value);
 
+    // regex check
     if (
       !isEmpty(field.value) &&
       !/^[1-9][0-9]{3}\s?[A-Z]{2}$/.test(field.value)
@@ -411,20 +433,24 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MARK: KEUZE GEMAAKT VALIDATIE */
   /*********************************/
 
-  // Kijkt of er binnen radio group een keuze is gemaakt
+  // Kijkt of er binnen radio group een keuze is gemaakt, anders foutmelding
   function validateRadioGroup(name, message) {
+    // Zoek alle radio's van de groep, bijvoorbeeld "married" zoekt naar die input
     const radios = document.querySelectorAll(
       `input[type="radio"][name="${name}"]`,
     );
+    // geen radio's? stop, als groep niet bestaat, gewoon geldig
     if (!radios.length) return true;
 
-    // Eerste radio krijgt custom validity message en groepsfoutmelding wordt zichtbaar
+    // Verborgen vragen, disabled, worder genegeerd
     const activeRadios = [...radios].filter((radio) => !radio.disabled);
+    // vraag is verborgen, geen validatie nodig
     if (!activeRadios.length) {
       setGroupError(`${name}-error`, "");
       return true;
     }
 
+    // niks gekozen = false, iets gekozen = true
     const checked = activeRadios.some((radio) => radio.checked);
 
     // Als er wel een keuze is gemaakt, wordt error weggehaald
@@ -433,6 +459,7 @@ document.addEventListener("DOMContentLoaded", () => {
       radio.setCustomValidity(index === 0 && !checked ? message : "");
     });
 
+    // checked = true geen teks, false is error
     setGroupError(`${name}-error`, checked ? "" : message);
     return checked;
   }
@@ -464,7 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /*********************/
   /* MARK: LANDENLIJST */
   /*********************/
-
+  // BRON: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
   // Array met landen en landcodes
   const countries = [
     { code: "AFG", name: "Afghanistan" },
@@ -486,6 +513,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Vult automatisch <datalist> met de landen als opties
   if (countryInput && countryHidden && datalist) {
+    // verwijder datalist uit HTML als js is geladen
+    datalist.innerHTML = "";
+
+    //maak eigen datalist aan a.d.h.v. array
     countries.forEach((country) => {
       const option = document.createElement("option");
       option.value = `${country.code} ${country.name}`;
@@ -499,13 +530,14 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MARK: LAND VALIDATIE + OPSLAAN */
   /**********************************/
 
-  // Kijkt of het veld actief is
+  // Kijkt of het veld actief is en bestaat
   function validateCountry() {
     if (!countryInput || !countryHidden || !isActiveField(countryInput)) {
       setFieldError(countryInput, "");
       return true;
     }
 
+    // haal waarde op die gebruiker heeft ingevuld
     const value = countryInput.value.trim();
 
     // Checkt of het verplicht en leeg is
@@ -515,6 +547,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
+    // leeg maar niet verplicht, gewoon toegestaan
     if (isEmpty(value)) {
       countryHidden.value = "";
       setFieldError(countryInput, "");
@@ -523,8 +556,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Zoekt of invoer overeenkomt met land of landcode
     const match = countries.find((country) => {
+      // vergelijkt dus landcode en landnaam, bijv: NLD Nederland
       const full = `${country.code} ${country.name}`;
-      // Geldig, input toont landnaam, hidden input krijgt landcode
+      // Gebruiker kan landcode of landnaam invoeren en dat werkt allemaal
       return (
         normalize(country.code) === normalize(value) ||
         normalize(country.name) === normalize(value) ||
@@ -532,13 +566,14 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 
+    // bij geen match, foutmelding
     if (!match) {
       countryHidden.value = "";
       // geen match is foutmelding tonen
       setFieldError(countryInput, "Kies een geldig land uit de lijst.");
       return false;
     }
-
+    // wel match, landcode opslaan
     countryInput.value = match.name;
     countryHidden.value = match.code;
     setFieldError(countryInput, "");
@@ -546,8 +581,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (countryInput) {
+    // bij selectie uit datalist
+    // BRON: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
     countryInput.addEventListener("change", validateCountry);
+    // wanneer gebruiker het veld verlaat
+    // BRON: https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
     countryInput.addEventListener("blur", validateCountry);
+    // tijdens typen wordt hidden waarde gewist, en error verdwijnt
     countryInput.addEventListener("input", () => {
       if (countryHidden) countryHidden.value = "";
       setFieldError(countryInput, "");
@@ -558,17 +598,19 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MARK: "1 VAN 3" GROEP VALIDATIE */
   /***********************************/
 
-  // Voor bsn, beconnummer en protocolnummer
+  // pakt velden voor bsn, beconnummer en protocolnummer
   const authorizedFields = [
     $("bsn-authorized-person"),
     $("beconnumber"),
     $("protocolnumber-authorized-person"),
+    // haalt null eruit
   ].filter(Boolean);
 
   // Kijk of 1 van de 3 is ingevuld
   function validateAuthorizedGroup() {
+    // geen velden? stop
     if (!authorizedFields.length) return true;
-
+    // Zoek welk veld is ingevuld
     const filledField = authorizedFields.find((field) => !isEmpty(field.value));
 
     // Zodra een veld is ingevuld, andere velden dissabelen
@@ -578,6 +620,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Als geen veld is gevuld, groepsfout tonen
     if (!filledField) {
+      // individuele fouten weg, alleen groepsfout tonen
       authorizedFields.forEach((field) => {
         setFieldError(field, "");
       });
@@ -590,8 +633,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
 
+    // wel veld ingevuld, geen groepsfout
     setGroupError("authorized-person-group-error", "");
 
+    // voorkomt dat disabled velden rood blijven
     authorizedFields.forEach((field) => {
       if (field !== filledField) {
         setFieldError(field, "");
@@ -610,16 +655,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return validateProtocol(filledField);
   }
 
+  // markeert het veld als 'aangeraakt' en start validatie
   authorizedFields.forEach((field) => {
     field.addEventListener("blur", () => {
       field.dataset.touched = "true";
       validateAuthorizedGroup();
     });
 
+    // Nog niet aangeraakt = geen live validatie
+    // wel aangeraakt = wel live validatie
     field.addEventListener("input", () => {
       const isTouched = field.dataset.touched === "true";
       const hasError = field.getAttribute("aria-invalid") === "true";
 
+      // error aanwezig = direct opnieuw checken
       if (isTouched || hasError) {
         validateAuthorizedGroup();
       }
@@ -711,26 +760,32 @@ document.addEventListener("DOMContentLoaded", () => {
   /**************************************/
 
   // Voor elk veld in de validator map:
-
+  // loop door alle validators
   Object.entries(validators).forEach(([id, validator]) => {
+    // pak het veld uit de DOM
     const field = $(id);
     if (!field) return;
 
+    // gebeurt als gebruiker het veld verlaat
     field.addEventListener("blur", () => {
+      // markeert veld als touched, dan mag live validatie
       field.dataset.touched = "true";
 
+      // initialen
       if (id === "initials" || id === "initial-2" || id === "initials-3") {
         field.value = normalizeInitials(field.value);
       }
-
+      // roept de juiste functie aan: validateInitials
       validator(field);
     });
-
+    // live validatie gebeurt bij elke toets
     field.addEventListener("input", () => {
+      // check status
       const hasError = field.getAttribute("aria-invalid") === "true";
       const isTouched = field.dataset.touched === "true";
-
+      // Alleen live validatie als gebruiker klaar is met veld (blur) EN er was al een fout of er is genoeg input
       if (isTouched && (hasError || shouldLiveValidate(field))) {
+        // valideer
         validator(field);
       }
     });
@@ -744,7 +799,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ["bsn", "bsn-authorized-person"].forEach((id) => {
     const field = $(id);
     if (!field) return;
-
+    // bij elke toets, alles behalve cijfers verwijderen
     field.addEventListener("input", () => {
       field.value = normalizeBsn(field.value);
     });
@@ -754,7 +809,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ["zip-code"].forEach((id) => {
     const field = $(id);
     if (!field) return;
-
+    // tijdens typen spaties weg, hoofdletters en juiste format
     field.addEventListener("input", () => {
       field.value = normalizePostcode(field.value);
     });
@@ -764,7 +819,8 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MARK: RADIO GROUPS AAN VALIDATIE HANGEN */
   /*******************************************/
 
-  // Alle groepen die verplicht zijn
+  // Lijst met radio groepen
+  // dit zijn alle name ittributen van mijn radio inputs
   const radioGroups = [
     "married",
     "conditions",
@@ -776,15 +832,18 @@ document.addEventListener("DOMContentLoaded", () => {
     "woonland",
   ];
 
-  // Daarna koppel ik aan elke radio een change en blur
-  // Zodra iemand radio button kiest of verlaat, wordt gecontroleerd of een keuze is gemaakt
+  // Voor elke groep (bijv. "married")
   radioGroups.forEach((name) => {
+    // zoek alle radio buttons in die groep
     document
       .querySelectorAll(`input[type="radio"][name="${name}"]`)
+      // voor elke individuele radio button
       .forEach((radio) => {
+        // gebeurt wanneer gebruiker een optie aanklikt
         radio.addEventListener("change", () =>
           validateRadioGroup(name, "Maak een keuze."),
         );
+        // gebeurt wanneer gebruiker radio verlaat door te tabben of ergens anders te klikken
         radio.addEventListener("blur", () =>
           validateRadioGroup(name, "Maak een keuze."),
         );
@@ -796,8 +855,12 @@ document.addEventListener("DOMContentLoaded", () => {
   /*******************************************************/
 
   // Als iemand radio aanklikt: opnieuw kijken welke subvragen zichtbaar moeten zijn
+  // globale listener, luistert naar elke change in het document
   document.addEventListener("change", (e) => {
+    // checkt of het een radiobutton is
+    // e.target = het element dat veranderd is
     if (e.target.matches('input[type="radio"]')) {
+      // roept functie aan. Kijkt welke radio gekozen is en bepaalt welke blokken zichtbaar worden
       updateConditionalVisibility();
     }
   });
@@ -821,29 +884,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Bij verzenden:
   if (form) {
-    // Conditionele velden opnieuw goed zetten
+    // luister naar submit, gebeurt wanneer gebruiker op 'verzenden' klikt
     form.addEventListener("submit", (e) => {
+      // zorgt dat alleen zichtbare velden actief zijn en hidden velden genegeerd worden
       updateConditionalVisibility();
 
-      // Alle gewone validators uitvoeren
+      // uitganspunt. alles oke, tenzij er fouten worden gevonden
       let isFormValid = true;
 
+      // voor elk veld, voer validator uit, als fout, isFormValid = false
       Object.entries(validators).forEach(([id, validator]) => {
         const field = $(id);
         if (field && !validator(field)) isFormValid = false;
       });
 
-      // Alle radio groepen controleren
+      // Alle radio groepen controleren, heeft gebruiker overal een keuze gemaakt?
       radioGroups.forEach((name) => {
         if (!validateRadioGroup(name, "Maak een keuze.")) {
           isFormValid = false;
         }
       });
 
-      // de '1 van 3' groep controleren
+      // de '1 van 3' groep controleren, is er minstens 1 ingevuld?
       if (!validateAuthorizedGroup()) isFormValid = false;
 
-      // De landkeuze controleren
+      // De landkeuze controleren, bestaat het land? is het correct gekozen
       if (!validateCountry()) isFormValid = false;
 
       // Als één van die dingen fout is, wordt het formulier niet verstuurd

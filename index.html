@@ -34,6 +34,10 @@
       <h1>Aangifte erfbelasting</h1>
 
       <!-- Bronnen: 
+      https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation
+      https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/required
+      https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/pattern
+      https://web.dev/learn/accessibility/forms
       https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/form#attributes 
       https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input 
       https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fieldset
@@ -42,16 +46,19 @@
       -->
       <form action="verstuurd.html">
         <fieldset>
-          <legend class="header">Gegevens van de overledene (1a) <span>Vraag 1 van 5</span></legend>
+          <legend class="header">
+            Gegevens van de overledene (1a) <span>Vraag 1 van 5</span>
+          </legend>
 
           <label for="initials">Voorletter(s)</label>
+          <!-- BRON: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-describedby -->
           <input
             type="text"
             id="initials"
             name="initials"
             required
             pattern="([A-Z]\.\s*){1,10}"
-            aria-describedby="initials-error"
+            aria-describedby="initials-error" 
           />
           <p class="error" id="initials-error">
             Vul geldige voorletters in, bijvoorbeeld J. of J.P.
@@ -98,7 +105,9 @@
         </fieldset>
 
         <fieldset>
-          <legend class="header">Partnerschap (1b) <span>Vraag 2 van 5</span></legend>
+          <legend class="header">
+            Partnerschap (1b) <span>Vraag 2 van 5</span>
+          </legend>
 
           <fieldset aria-describedby="married-error">
             <legend class="question">
@@ -202,7 +211,9 @@
         </fieldset>
 
         <fieldset>
-          <legend class="header">Kinderen (1c) <span>Vraag 3 van 5</span></legend>
+          <legend class="header">
+            Kinderen (1c) <span>Vraag 3 van 5</span>
+          </legend>
 
           <fieldset aria-describedby="deceased-child-error">
             <legend class="question">Had de overledene kinderen?</legend>
@@ -283,7 +294,9 @@
         </fieldset>
 
         <fieldset>
-          <legend class="header">Testament (1d) <span>Vraag 4 van 5</span></legend>
+          <legend class="header">
+            Testament (1d) <span>Vraag 4 van 5</span>
+          </legend>
 
           <fieldset aria-describedby="testament-error">
             <legend class="question">Had de overledene een testament?</legend>
@@ -378,7 +391,9 @@
         </fieldset>
 
         <fieldset>
-          <legend class="header">Gegevens gemachtigde (2a) <span>Vraag 5 van 5</span></legend>
+          <legend class="header">
+            Gegevens gemachtigde (2a) <span>Vraag 5 van 5</span>
+          </legend>
 
           <fieldset
             id="authorized-person-group"
@@ -628,6 +643,14 @@
                 data-required-when-visible
                 aria-describedby="country-input-error"
               />
+
+              <datalist id="country-codes">
+                <option value="NLD Nederland"></option>
+                <option value="BEL België"></option>
+                <option value="DEU Duitsland"></option>
+                <option value="FRA Frankrijk"></option>
+              </datalist>
+
               <p class="error" id="country-input-error">
                 Kies een geldig land uit de lijst.
               </p>

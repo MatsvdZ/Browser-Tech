@@ -608,3 +608,35 @@ https://stackoverflow.com/questions/17898523/regular-expression-for-dutch-zip-po
 https://www.google.com/search?q=hoe+lang+na+overlijden+aangifte+erfbelasting&rlz=1C5CHFA_enNL1083NL1084&oq=hoelang+na+overlijden+aan&gs_lcrp=EgZjaHJvbWUqCQgBEAAYDRiABDIGCAAQRRg5MgkIARAAGA0YgAQyCAgCEAAYDRgeMgoIAxAAGAoYFhgeMggIBBAAGBYYHjIKCAUQABgIGA0YHjIKCAYQABgIGA0YHjIKCAcQABiABBiiBDIKCAgQABiABBiiBDIKCAkQABiABBiiBNIBCTIxMzU1ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
 
 https://briefs.video/videos/what-happened-to-text-inputs/
+
+
+
+
+
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/required
+
+https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/pattern
+
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/checkValidity
+
+https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+
+https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
+
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
+
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+Workshop victor voor custom validation
+
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-invalid
+
+https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-describedby
+
+https://web.dev/learn/accessibility/forms
+
+https://developer.mozilla.org/en-US/docs/Glossary/Progressive_Enhancement
