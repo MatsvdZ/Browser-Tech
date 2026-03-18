@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return value.includes("@");
     }
 
-    return true;
+    return false;
   }
 
   /************************/
@@ -259,17 +259,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return true;
     }
 
-    let value = field.value.trim();
+    const value = field.value.trim();
 
     if (field.required && isEmpty(value)) {
       setFieldError(field, "Vul uw voorletter(s) in.");
       return false;
     }
 
-    value = normalizeInitials(value);
-    field.value = value;
-
-    if (!/^([A-Z]\.){1,10}$/.test(value)) {
+    if (!isEmpty(value) && !/^([A-Z]\.){1,10}$/.test(value)) {
       setFieldError(
         field,
         "Vul geldige voorletters in, bijvoorbeeld J. of J.P.",
@@ -721,6 +718,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     field.addEventListener("blur", () => {
       field.dataset.touched = "true";
+
+      if (id === "initials" || id === "initial-2" || id === "initials-3") {
+        field.value = normalizeInitials(field.value);
+      }
+
       validator(field);
     });
 
@@ -731,6 +733,30 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isTouched && (hasError || shouldLiveValidate(field))) {
         validator(field);
       }
+    });
+  });
+
+  /**************************/
+  /* MARK: NORMALIZE INPUTS */
+  /**************************/
+
+  // BSN alleen cijfers laten tijdens typen
+  ["bsn", "bsn-authorized-person"].forEach((id) => {
+    const field = $(id);
+    if (!field) return;
+
+    field.addEventListener("input", () => {
+      field.value = normalizeBsn(field.value);
+    });
+  });
+
+  // Nederlandse postcode automatisch formatteren
+  ["zip-code"].forEach((id) => {
+    const field = $(id);
+    if (!field) return;
+
+    field.addEventListener("input", () => {
+      field.value = normalizePostcode(field.value);
     });
   });
 

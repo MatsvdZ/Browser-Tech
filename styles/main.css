@@ -224,6 +224,7 @@ input:hover {
 input:focus {
   outline: 2px solid var(--color-content-interactive);
   outline-offset: 2px;
+
 }
 
 input:required {
@@ -293,9 +294,9 @@ input[aria-invalid="false"]:not([type="radio"]):user-valid {
   border-color: var(--color-content-success);
 }
 
-/***********************/
-/* MARK: BUTTONS       */
-/***********************/
+/*****************/
+/* MARK: BUTTONS */
+/*****************/
 button {
   display: block;
   width: 80%;
